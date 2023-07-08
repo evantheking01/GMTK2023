@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class Soldier : MonoBehaviour
 {
-    private float health = 100f;
+    public float maxHealth = 100f;
+    private float currentHealth;
+    public HealthBar healthBar;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     // Update is called once per frame
@@ -20,9 +23,10 @@ public class Soldier : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        health -= damage;
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
 
-        if(health <= 0)
+        if(currentHealth <= 0)
         {
             Destroy(gameObject);
         }  
