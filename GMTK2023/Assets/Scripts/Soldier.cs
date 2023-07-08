@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using  UnityEngine.Events;
 
 public class Soldier : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Soldier : MonoBehaviour
     private float currentHealth;
     public HealthBar healthBar;
     [SerializeField] private Transform movePositionTransform;
+    public UnityEvent<Vector3> deathEvent;
 
     private NavMeshAgent navMeshAgent;
     private void Awake() 
@@ -42,16 +44,8 @@ public class Soldier : MonoBehaviour
 
         if(currentHealth <= 0)
         {
-            NavMeshPath path = new NavMeshPath();
-            if(NavMesh.CalculatePath(transform.position, movePositionTransform.position, navMeshAgent.areaMask, path))
-            {
-                float totalDistance = Vector3.Distance(transform.position, path.corners[0]);
-                for (int i = 1; i < path.corners.Length; i++)
-                {
-                    totalDistance += Vector3.Distance(path.corners[i], path.corners[i-1]);
-                }
-                Debug.Log("Soldier died " + totalDistance.ToString() +" feet from the goal!");
-            }
+            
+            deathEvent.Invoke(transform.position);
             Destroy(gameObject);
         }  
     }

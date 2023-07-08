@@ -9,8 +9,12 @@ public class EconomyManager : MonoBehaviour
     private static EconomyManager _instance;
 
     public UnityEvent<int> moneyChangeEvent;
+    public UnityEvent soldierDiedEvent;
+    public float deathMinimumMoney = 0f;
+    public float deathMaximumMoney = 1000f;
 
     private int money;
+    private int attackMoney;
 
     // Start is called before the first frame update
     void Start()
@@ -67,4 +71,17 @@ public class EconomyManager : MonoBehaviour
     {
         return money;
     }
+
+    public void SoldierDied(float pathCompletionRatio)
+    {
+        float moneyAwarded = ((deathMaximumMoney - deathMinimumMoney) * pathCompletionRatio) + deathMinimumMoney;
+        attackMoney += (int) moneyAwarded;
+    }
+
+    public void attackPhaseOver()
+    {
+        IncreaseMoney(attackMoney);
+        attackMoney = 0;
+    }
+
 }
