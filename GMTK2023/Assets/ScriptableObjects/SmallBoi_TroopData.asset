@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 433384745b6bbbe4d902beb4a504c873, type: 3}
-  m_Name: Troop1_Deca
+  m_Name: SmallBoi_TroopData
   m_EditorClassIdentifier: 
-  troopPrefab: {fileID: 6351585799888821033, guid: d159c5e0d735f294bb248d17bf69d6c2,
+  groupName: Smol Boi
+  troopPrefab: {fileID: 4128023685986796397, guid: 24f0332261b12984aa8dab534f9a3973,
     type: 3}
-  costPerUnit: 1
-  count: 10
+  costPerUnit: 50
+  bulkPurcaseCounts: 010000000a00000019000000

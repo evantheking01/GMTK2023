@@ -12,21 +12,44 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] GameObject deploymentZoneUIPrefab;
     [SerializeField] RectTransform deploymentZonesPanel;
+    [SerializeField] Text moneyText;
+
+    private TroopShopUI shopUI;
 
     // Start is called before the first frame update
     void Start()
     {
         if (_instance != null && _instance != this)
             Destroy(gameObject);
+        else
+            _instance = this;
+    }
 
-        _instance = this;
-        DontDestroyOnLoad(gameObject);
+    public void Initialize()
+    {
+        if (_instance != null && _instance != this)
+            Destroy(gameObject);
+        else
+            _instance = this;
+
+        moneyText.text = "";    // hides this while in main menu
+
+        if (EconomyManager.Instance.moneyChangeEvent == null)
+            EconomyManager.Instance.moneyChangeEvent = new UnityEngine.Events.UnityEvent<int>();
+        EconomyManager.Instance.moneyChangeEvent.AddListener(UpdateMoneyText);
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void PolulateShop(List<TroopPurchaseData> shopData)
+    {
+        shopUI = GetComponentInChildren<TroopShopUI>();
+        shopUI.Initialize(shopData);
     }
 
     public void InitializeDeploymentZonesUI(DeploymentZone[] deploymentZones)
@@ -39,5 +62,10 @@ public class UIManager : MonoBehaviour
             // TODO: implement a class that ties the deployment zone to this UI element and keeps it in the proper screen space on Update tick
             //zoneUIElement.
         }
+    }
+
+    private void UpdateMoneyText(int money)
+    {
+        moneyText.text = money.ToString("C");
     }
 }

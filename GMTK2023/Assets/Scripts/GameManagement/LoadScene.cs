@@ -26,6 +26,7 @@ public class LoadScene : MonoBehaviour
 
     public static void LoadLevel(int levelIndex)
     {
-
+        // "Level1" Level + levelIndex.ToString()
+        SceneManager.LoadScene(levelIndex);
     }
 }

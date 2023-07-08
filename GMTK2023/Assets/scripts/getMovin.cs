@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class clickToMove : MonoBehaviour
+public class getMovin : MonoBehaviour
 {
     [SerializeField] private Transform movePositionTransform;
 

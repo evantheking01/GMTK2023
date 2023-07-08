@@ -25,8 +25,8 @@ public class SpawnManager : MonoBehaviour
         
     }
 
-    public void SpawnAtActiveZone(TroopData troopData)
+    public void SpawnAtActiveZone(TroopPurchaseData troopData, int troopCount)
     {
-        activeZone.AddToDeploymentQueue(troopData);
+        activeZone.AddToDeploymentQueue(troopData, troopCount);
     }
 }

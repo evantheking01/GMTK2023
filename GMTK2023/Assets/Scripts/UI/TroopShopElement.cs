@@ -4,12 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using Text = TMPro.TextMeshProUGUI;
 
+// Simple clickable button for spawning units
+// THIS IS MOSTLY FOR TESTING
 public class TroopShopElement : MonoBehaviour
 {
     public Button purchaseButton;
     public Text countText;
 
-    private TroopData troopData;
+    private TroopPurchaseData troopData;
+    private int troopCount;
 
     // Start is called before the first frame update
     void Start()
@@ -23,17 +26,18 @@ public class TroopShopElement : MonoBehaviour
         
     }
 
-    public void Initialize(TroopData data)
+    public void Initialize(TroopPurchaseData data, int count)
     {
         troopData = data;
-        countText.text = troopData.count.ToString();
+        troopCount = count;
+        countText.text = troopCount.ToString();
         purchaseButton.onClick.AddListener(Purchase);
         
     }
 
     public void Purchase()
     {
-        SpawnManager.Instance.SpawnAtActiveZone(troopData);
+        SpawnManager.Instance.SpawnAtActiveZone(troopData, troopCount);
     }
 
 }

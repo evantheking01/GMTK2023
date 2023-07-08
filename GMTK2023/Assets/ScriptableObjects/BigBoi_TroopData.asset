@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 433384745b6bbbe4d902beb4a504c873, type: 3}
-  m_Name: Troop1_Penta
+  m_Name: BigBoi_TroopData
   m_EditorClassIdentifier: 
+  groupName: Big Boi
   troopPrefab: {fileID: 6351585799888821033, guid: d159c5e0d735f294bb248d17bf69d6c2,
     type: 3}
-  costPerUnit: 1
-  count: 5
+  costPerUnit: 250
+  bulkPurcaseCounts: 0100000005000000
