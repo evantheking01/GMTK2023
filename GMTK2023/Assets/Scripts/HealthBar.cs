@@ -10,11 +10,13 @@ public class HealthBar : MonoBehaviour
 
     void Awake ()
     {
-        image = GetComponentsInChildren<Image>();
+        
     }
 
     public void SetMaxHealth(float maxHealth)
     {
+        image = GetComponentsInChildren<Image>();
+        
         slider.maxValue = maxHealth;
         slider.value = maxHealth;
 

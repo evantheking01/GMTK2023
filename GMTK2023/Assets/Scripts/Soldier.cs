@@ -53,4 +53,12 @@ public class Soldier : MonoBehaviour
             Destroy(gameObject);
         }  
     }
+
+    public void Kill()
+    {
+        currentHealth = 0;
+        healthBar.SetHealth(currentHealth);
+        deathEvent.Invoke(transform.position);
+        Destroy(gameObject);
+    }
 }

@@ -34,7 +34,6 @@ public class Tutorial : MonoBehaviour
         hintObject.SetParent(transform);
         hintText.text = "Click on a troop in the shop";
 
-        Debug.Log(shopElement.name + " at " + shopElement.transform.position + " anchored at " + shopElement.GetComponent<RectTransform>().anchoredPosition);
         if (shopElement.grabEvent == null)
             shopElement.grabEvent = new UnityEvent();
         shopElement.grabEvent.RemoveListener(TeachSpawn);

@@ -94,7 +94,6 @@ public class DeploymentZone : MonoBehaviour
 
         // ratio that shit
         float pathCompletionRatio = distanceTraveled / (distanceTraveled + distanceToGoal);
-        Debug.Log("test");
         EconomyManager.Instance.SoldierDied(pathCompletionRatio);
 
     }

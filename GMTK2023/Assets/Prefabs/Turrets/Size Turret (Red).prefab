@@ -76,7 +76,7 @@ PrefabInstance:
     - target: {fileID: 4264533440308301162, guid: b4f5faf5098e6424584fc98011c89132,
         type: 3}
       propertyPath: fireRate
-      value: 2.5
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4264533440308301162, guid: b4f5faf5098e6424584fc98011c89132,
         type: 3}
@@ -91,7 +91,7 @@ PrefabInstance:
     - target: {fileID: 6000860975357470942, guid: b4f5faf5098e6424584fc98011c89132,
         type: 3}
       propertyPath: m_Name
-      value: Size Turret (Red) Variant
+      value: Size Turret (Red)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

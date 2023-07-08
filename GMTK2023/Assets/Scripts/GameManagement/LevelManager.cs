@@ -19,6 +19,9 @@ public class LevelManager : MonoBehaviour
 
     private DeploymentZone[] deploymentZones;
     private int unitCount = 0;
+    private int goalCount = 0;
+
+    private int winCount = 10;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -52,6 +55,19 @@ public class LevelManager : MonoBehaviour
         }
         
         UIManager.Instance.PolulateShop(shopData);
+
+        GoalManager goalManager = GameObject.FindObjectOfType<GoalManager>();
+        goalManager.goalEvent.AddListener(GoalReached);
+    }
+
+    public void GoalReached()
+    {
+        goalCount++;
+
+        if(goalCount > winCount)
+        {
+            Debug.Log("LEVEL WON");
+        }
     }
 
     private void incrementUnitCount(Soldier soldier)
