@@ -12,11 +12,14 @@ public class clickToMove : MonoBehaviour
     private void Awake() 
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        GameObject goalObj = GameObject.FindGameObjectWithTag("Goal");
+        if (goalObj)
+            movePositionTransform = goalObj.transform;
     }
 
     private void Update()
     {
-        if(!(navMeshAgent == null))
+        if(!(navMeshAgent == null) && movePositionTransform != null)
             navMeshAgent.destination = movePositionTransform.position;
     }
     

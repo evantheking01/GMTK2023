@@ -29,6 +29,7 @@ public class DeploymentZone : MonoBehaviour
                 Instantiate(troopPrefab, transform);    // relies on prefabs having a zero vector position.
                 if (spawnEvent != null)
                     spawnEvent.Invoke();
+                lastSpawnTime = Time.time;
             }
         }
     }

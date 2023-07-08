@@ -7,7 +7,7 @@ public class SpawnManager : MonoBehaviour
     public static SpawnManager Instance { get { return _instance; } }
     private static SpawnManager _instance;
 
-    private DeploymentZone activeZone;
+    public DeploymentZone activeZone;
 
     // Start is called before the first frame update
     void Start()

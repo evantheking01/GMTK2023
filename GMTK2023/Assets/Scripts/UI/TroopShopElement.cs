@@ -6,9 +6,10 @@ using Text = TMPro.TextMeshProUGUI;
 
 public class TroopShopElement : MonoBehaviour
 {
-    public TroopData troopData;
     public Button purchaseButton;
     public Text countText;
+
+    private TroopData troopData;
 
     // Start is called before the first frame update
     void Start()
