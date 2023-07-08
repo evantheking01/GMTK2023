@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get { return _instance; } }
     private static GameManager _instance;
 
+    [SerializeField] UIManager uiManager;
+    [SerializeField] EconomyManager economyManager;
+
     private int currLevel;
 
     public GameObject startMenu;
@@ -17,10 +20,20 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         if (_instance != null && _instance != this)
+        {
             Destroy(gameObject);
+        }
+        else
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject); 
+        }
+        
+        economyManager.Initialize();
+        uiManager.Initialize();
+        economyManager.SetMoney(100);
 
-        _instance = this;
-        DontDestroyOnLoad(gameObject);  
+        StartLevel();
     }
 
     // Update is called once per frame
@@ -31,13 +44,27 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        currLevel = 0; // -1 because LoadnextLevel increments level counter
+        if (pauseButton)
+        {
+            pauseButton.SetActive(true); // Reveal the pause button once the game starts
+        }
+        if (startMenu)
+        {
+            startMenu.SetActive(false);
+        }
+
+        currLevel = 0;
         LoadNextLevel();
+    }
 
-        pauseButton.SetActive(true); // Reveal the pause button once the game starts
-        startMenu.SetActive(false);
-
-        // from here leave it to the individual level manager to control the mechanics
+    private void StartLevel()
+    {
+        // Call level manager to start the first planning phase
+        LevelManager levelManager = GameObject.FindObjectOfType<LevelManager>();
+        if (levelManager)
+        {
+            levelManager.Initialize();
+        }
     }
 
     private void LoadNextLevel()
@@ -45,7 +72,7 @@ public class GameManager : MonoBehaviour
         currLevel++;
         LoadScene.LoadLevel(currLevel);
 
-        // Call level manager to start the first planning phase
+        StartLevel();
     }
 
     public void LoadMainMenu()
