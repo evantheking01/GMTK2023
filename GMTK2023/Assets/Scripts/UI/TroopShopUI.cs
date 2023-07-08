@@ -5,16 +5,21 @@ using UnityEngine.UI;
 
 public class TroopShopUI : MonoBehaviour
 {
-    public GameObject shopElementPrefab;
-    public List<TroopData> shopItems;
+    public GameObject shopGroupPrefab, shopElementPrefab;
+    public List<TroopPurchaseData> shopItems;
 
     // Start is called before the first frame update
     void Start()
     {
         foreach (var item in shopItems)
         {
-            TroopShopElement shopElement = Instantiate(shopElementPrefab, transform).GetComponent<TroopShopElement>();
-            shopElement.Initialize(item);
+            TroopShopGroup shopGroup = Instantiate(shopGroupPrefab, transform).GetComponent< TroopShopGroup>();
+            shopGroup.Initialize(item.groupName);
+            for (int i = 0; i < item.bulkPurcaseCounts.Length; i++)
+            {
+                DragAndDropTroopElement shopElement = Instantiate(shopElementPrefab, shopGroup.transform).GetComponent<DragAndDropTroopElement>();
+                shopElement.Initialize(item, item.bulkPurcaseCounts[i]);
+            }
         }
     }
 

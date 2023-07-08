@@ -5,12 +5,15 @@ using UnityEngine.Events;
 
 public class DeploymentZone : MonoBehaviour
 {
+    public UnityEvent spawnEvent;
+
     [SerializeField] float spawnDelay = 0.05f;
     private float lastSpawnTime;
 
-    private Queue<GameObject> deploymentQueue = new Queue<GameObject>();
+    private List<GameObject> troopDatabase = new List<GameObject>();
+    private Queue<int> deploymentQueue = new Queue<int>();
 
-    public UnityEvent spawnEvent;
+
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +28,7 @@ public class DeploymentZone : MonoBehaviour
         {
             if (deploymentQueue.Count > 0)
             {
-                GameObject troopPrefab = deploymentQueue.Dequeue();
+                GameObject troopPrefab = troopDatabase[deploymentQueue.Dequeue()];
                 Instantiate(troopPrefab, transform);    // relies on prefabs having a zero vector position.
                 if (spawnEvent != null)
                     spawnEvent.Invoke();
@@ -33,13 +36,28 @@ public class DeploymentZone : MonoBehaviour
             }
         }
     }
-    
-    public void AddToDeploymentQueue(TroopData troopData)
+
+    public void AddToDeploymentQueue(TroopPurchaseData troopData, int troopCount)
     {
-        for (int i = 0; i < troopData.count; i++)
+        int troopID = -1;
+        for (int i = 0; i < troopDatabase.Count; i++)
         {
-            deploymentQueue.Enqueue(troopData.troopPrefab);
+            if (troopDatabase[i] == troopData.troopPrefab)
+            {
+                Debug.Log("prefabs same");
+                troopID = i;
+            }
         }
+
+        // register new prefab
+        if (troopID < 0)
+        {
+            troopID = troopDatabase.Count;
+            troopDatabase.Add(troopData.troopPrefab);
+        }
+
+        for (int i = 0; i < troopCount; i++)
+            deploymentQueue.Enqueue(troopID);
     }
 
 }
