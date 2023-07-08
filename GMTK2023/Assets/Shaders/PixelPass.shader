@@ -7,6 +7,8 @@
 
     SubShader
     {
+        ZTest Always
+        
         Tags
         {
             "RenderType"="Opaque" "RenderPipeline" = "UniversalPipeline"
@@ -58,7 +60,8 @@
         Pass
         {
             Name "PixelPass"
-
+            ZTest Always
+            
             HLSLPROGRAM
             half4 frag(Varyings IN) : SV_TARGET
             {

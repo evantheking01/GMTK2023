@@ -9,6 +9,7 @@ namespace ArtStyle
         public class CustomPassSettings
         {
             public RenderPassEvent renderPassEvent = RenderPassEvent.BeforeRenderingPostProcessing;
+
             public int screenHeight = 144;
         }
 
