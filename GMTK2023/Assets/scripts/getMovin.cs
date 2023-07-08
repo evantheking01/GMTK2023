@@ -15,12 +15,14 @@ public class getMovin : MonoBehaviour
         GameObject goalObj = GameObject.FindGameObjectWithTag("Goal");
         if (goalObj)
             movePositionTransform = goalObj.transform;
+
+        if(!(navMeshAgent == null) && movePositionTransform != null)
+            navMeshAgent.SetDestination(movePositionTransform.position);
     }
 
     private void Update()
     {
-        if(!(navMeshAgent == null) && movePositionTransform != null)
-            navMeshAgent.destination = movePositionTransform.position;
+        
     }
     
 }
