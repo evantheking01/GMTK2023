@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 433384745b6bbbe4d902beb4a504c873, type: 3}
+  m_Name: SmallBoi_TroopData
+  m_EditorClassIdentifier: 
+  groupName: Smol Boi
+  troopPrefab: {fileID: 4128023685986796397, guid: 24f0332261b12984aa8dab534f9a3973,
+    type: 3}
+  costPerUnit: 1
+  bulkPurcaseCounts: 050000000a00000019000000
