@@ -11,9 +11,6 @@ public class Turret : MonoBehaviour
 
     [SerializeField] private GameObject bulletPrefab;
 
-    private readonly Collider[] _colliders = new Collider[100];
-    [SerializeField] private int _numFound = 0;
-
     private Transform target;
 
     [SerializeField] private float fireRate = 1f;
@@ -27,28 +24,26 @@ public class Turret : MonoBehaviour
 
     private void UpdateTarget()
     {
-        _numFound = Physics.OverlapSphereNonAlloc(transform.position, radius, _colliders);
-        List<GameObject> targets = new List<GameObject>();
-        
-        for(int i = 0; i < _numFound; i++)
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag(targetTag);
+        float shorestDistance = Mathf.Infinity;
+        GameObject nearestTarget = null;
+        foreach(GameObject enemy in enemies)
         {
-            if(_colliders[i].tag == targetTag)
+            float distance = Vector3.Distance(transform.position, enemy.transform.position);
+            if(distance < shorestDistance)
             {
-                targets.Add(_colliders[i].gameObject);
+                shorestDistance = distance;
+                nearestTarget = enemy;
             }
         }
-        
-        if(targets.Count > 0)
-        {
-            target = targets[0].transform;
 
+        if(nearestTarget != null && shorestDistance <= radius)
+        {
+            target = nearestTarget.transform;
         }
         else
         {
-            if(target != null)
-            {
-                target = null;
-            }
+            target = null;
         }
     }
 
