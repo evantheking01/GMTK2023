@@ -25,7 +25,7 @@ public class LevelManager : MonoBehaviour
     public void Initialize()
     {
         deploymentZones = GameObject.FindObjectsOfType<DeploymentZone>();
-        //UIManager.Instance.InitializeDeploymentZonesUI(deploymentZones);
+        UIManager.Instance.InitializeDeploymentZonesUI(deploymentZones);
         UIManager.Instance.PolulateShop(shopData);
     }
 }

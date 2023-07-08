@@ -6,8 +6,11 @@ using Text = TMPro.TextMeshProUGUI;
 
 public class DeploymentZoneUIElement : MonoBehaviour
 {
+    private Vector2 offset = new Vector2(-40, -40);
 
-    private Transform deploymentZone;
+    private RectTransform rectTransform;
+    public DeploymentZone ZoneOfDeployment { get { return deploymentZone; } }
+    private DeploymentZone deploymentZone;
 
     [SerializeField] Button deployTroopsButton;
 
@@ -15,18 +18,23 @@ public class DeploymentZoneUIElement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        rectTransform = GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (deploymentZone)
+        {
+            Vector2 screenPos = Camera.main.WorldToScreenPoint(deploymentZone.transform.position);
+            transform.position = screenPos + offset;
+        }
     }
 
-    public void SetDeploymentZone(DeploymentZone deploymentZone)
+    public void SetDeploymentZone(DeploymentZone dz)
     {
         //deployTroopsButton.onClick.AddListener(deploymentZone.DeployTroops)
+        deploymentZone = dz;
     }
 
 }
