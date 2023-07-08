@@ -8,7 +8,7 @@ public class HealthBar : MonoBehaviour
     public Slider slider;
     private Image[] image;
 
-    void Start ()
+    void Awake ()
     {
         image = GetComponentsInChildren<Image>();
     }
