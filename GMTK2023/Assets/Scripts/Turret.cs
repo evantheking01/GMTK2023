@@ -16,6 +16,8 @@ public class Turret : MonoBehaviour
 
     [SerializeField] private float fireRate = 1f;
 
+    [SerializeField] private int damage = 25;
+
     float fireCountdown = 0f;
 
     enum Priority {Speed, Size, Close};
@@ -136,6 +138,7 @@ public class Turret : MonoBehaviour
         Debug.Log("SHOOTING " + target.name);
         GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
                 Bullet bullet = bulletGO.GetComponent<Bullet>();
+                bullet.damage = damage;
 
                 if (bullet != null)
                     bullet.Seek(target);
