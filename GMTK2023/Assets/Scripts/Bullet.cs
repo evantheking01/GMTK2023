@@ -47,7 +47,6 @@ public class Bullet : MonoBehaviour
 
     private void HitTarget()
     {
-        Debug.Log("HIT!");
         Soldier soldier = target.GetComponent<Soldier>();
         soldier.TakeDamage(damage);
         Destroy(gameObject);

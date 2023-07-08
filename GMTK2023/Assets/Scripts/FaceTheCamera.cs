@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FaceTheCamera : MonoBehaviour
 {
-
     // Update is called once per frame
     void LateUpdate()
     {

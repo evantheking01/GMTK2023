@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SmallBoi_TroopData
   m_EditorClassIdentifier: 
   groupName: Smol Boi
-  troopPrefab: {fileID: 4128023685986796397, guid: 24f0332261b12984aa8dab534f9a3973,
+  troopPrefab: {fileID: 6992163058229335563, guid: e974977eeebe46f4eb37d9140459ee5b,
     type: 3}
   costPerUnit: 50
   bulkPurcaseCounts: 010000000a00000019000000

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // This component will persist in all scenes and tracks player progression
 public class GameManager : MonoBehaviour
@@ -33,7 +34,9 @@ public class GameManager : MonoBehaviour
         uiManager.Initialize();
         economyManager.SetMoney(100);
 
-        StartLevel();
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
+        // StartLevel();
     }
 
     // Update is called once per frame
@@ -72,6 +75,10 @@ public class GameManager : MonoBehaviour
         currLevel++;
         LoadScene.LoadLevel(currLevel);
 
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
         StartLevel();
     }
 

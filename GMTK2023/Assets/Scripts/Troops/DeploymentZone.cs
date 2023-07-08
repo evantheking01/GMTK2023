@@ -14,8 +14,6 @@ public class DeploymentZone : MonoBehaviour
     private List<GameObject> troopDatabase = new List<GameObject>();
     private Queue<int> deploymentQueue = new Queue<int>();
 
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -96,7 +94,6 @@ public class DeploymentZone : MonoBehaviour
 
         // ratio that shit
         float pathCompletionRatio = distanceTraveled / (distanceTraveled + distanceToGoal);
-        Debug.Log("test");
         EconomyManager.Instance.SoldierDied(pathCompletionRatio);
 
     }
