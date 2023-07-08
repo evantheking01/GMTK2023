@@ -46,12 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 4
-  targetTag: Enemy
+  targetTag: Soldier
   gun: {fileID: 2923356958296725669}
   firePoint: {fileID: 1996145098509515359}
   bulletPrefab: {fileID: 1093716386284482833, guid: f9e67ee118a49594caa0839c5af0d579,
     type: 3}
-  _numFound: 0
   fireRate: 1
 --- !u!1 &8330526154098654132
 GameObject:
