@@ -10,8 +10,10 @@ public class GameManager : MonoBehaviour
 
     private int currLevel;
 
+    public GameObject startMenu;
+    public GameObject pauseMenu;
+    public GameObject pauseButton;
 
-    // Start is called before the first frame update
     void Start()
     {
         if (_instance != null && _instance != this)
@@ -29,8 +31,11 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        currLevel = -1; // -1 because LoadnextLevel increments level counter
+        currLevel = 0; // -1 because LoadnextLevel increments level counter
         LoadNextLevel();
+
+        pauseButton.SetActive(true); // Reveal the pause button once the game starts
+        startMenu.SetActive(false);
 
         // from here leave it to the individual level manager to control the mechanics
     }
@@ -43,5 +48,42 @@ public class GameManager : MonoBehaviour
         // Call level manager to start the first planning phase
     }
 
+    public void LoadMainMenu()
+    {
+        ResumeGame();
+        currLevel = 0;
+        LoadScene.LoadLevel(currLevel);
+
+        pauseButton.SetActive(false);
+        pauseMenu.SetActive(false);
+
+        startMenu.SetActive(true);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0.0f;
+        if(pauseMenu)
+        {
+            pauseMenu.SetActive(true);
+            pauseButton.SetActive(false);
+        }
+
+    }
+
+    public void ResumeGame()
+    {
+        if(pauseMenu)
+        {
+            pauseMenu.SetActive(false);
+            pauseButton.SetActive(true);
+        }
+        Time.timeScale = 1.0f;
+    }
 
 }
