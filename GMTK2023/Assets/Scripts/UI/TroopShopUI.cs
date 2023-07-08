@@ -39,6 +39,7 @@ public class TroopShopUI : MonoBehaviour
             {
                 DragAndDropTroopElement shopElement = Instantiate(shopElementPrefab, shopGroup.transform).GetComponent<DragAndDropTroopElement>();
                 shopElement.Initialize(item, item.bulkPurcaseCounts[i]);
+                shopElement.name = shopElement.name.Replace("(Clone)", $" {item.bulkPurcaseCounts[i]} {item.groupName}s");
             }
         }
     }
@@ -47,6 +48,14 @@ public class TroopShopUI : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public Transform GetFirstShopItem()
+    {
+        if (shopGroupElements == null) return null;
+        if (shopGroupElements.Count == 0) return null;
+
+        return shopGroupElements[0].transform.GetChild(1);
     }
 
 }

@@ -8,11 +8,12 @@ using UnityEngine.EventSystems;
 
 public class DragAndDropTroopElement : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
+    public UnityEvent grabEvent;
+    public UnityEvent<bool> dropEvent;
+
     private RectTransform rectTransform;
     private LayoutElement layoutElement;
     public Text countText, costText;
-
-    private float canvasScale = 1;
 
     private TroopPurchaseData troopData;
     private int troopCount;
@@ -23,13 +24,6 @@ public class DragAndDropTroopElement : MonoBehaviour, IPointerDownHandler, IBegi
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
-        CanvasScaler canvasScaler = GetComponentInParent<CanvasScaler>();
-        // Assuming match will be either 0 or 1. Otherwise this is some more math
-        if (canvasScaler.matchWidthOrHeight > 0.5f)
-            canvasScale = canvasScaler.referenceResolution.y / Screen.height;
-        else
-            canvasScale = canvasScaler.referenceResolution.x / Screen.width;
-
     }
 
     // Update is called once per frame
@@ -54,7 +48,6 @@ public class DragAndDropTroopElement : MonoBehaviour, IPointerDownHandler, IBegi
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-
         if(!EconomyManager.Instance.CanAfford(PurchaseCost()))
         {
             //TODO: Tell the user they are broke
@@ -71,12 +64,15 @@ public class DragAndDropTroopElement : MonoBehaviour, IPointerDownHandler, IBegi
         copiedElement.Initialize(troopData, troopCount);
         copiedElement.transform.SetSiblingIndex(siblingIndex);
 
-        rectTransform.parent = GetComponentInParent<Canvas>().transform;
+        rectTransform.SetParent(GetComponentInParent<Canvas>().transform);
         layoutElement.ignoreLayout = true;
 
         EconomyManager.Instance.DecreaseMoney(PurchaseCost());
 
         canDrag = true;
+
+        if (grabEvent != null)
+            grabEvent.Invoke();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -86,8 +82,7 @@ public class DragAndDropTroopElement : MonoBehaviour, IPointerDownHandler, IBegi
             return;
         }
         
-        rectTransform.anchoredPosition += eventData.delta * canvasScale;    // without canvas scale, item will not follow mouse properly
-        
+        rectTransform.anchoredPosition += eventData.delta * UIManager.Instance.CanvasScale;    // without canvas scale, item will not follow mouse properly
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -112,14 +107,18 @@ public class DragAndDropTroopElement : MonoBehaviour, IPointerDownHandler, IBegi
             }
         }
 
+        if (dropEvent != null)
+            dropEvent.Invoke(success);
+
         // refund money since troops not deployed on valid area
         if (!success)
         {
             EconomyManager.Instance.IncreaseMoney(PurchaseCost());
         }
 
-        Destroy(gameObject);
+        
 
+        Destroy(gameObject);
     }
 
     public void OnPointerDown(PointerEventData eventData)

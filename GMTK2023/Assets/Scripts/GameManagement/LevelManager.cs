@@ -44,13 +44,13 @@ public class LevelManager : MonoBehaviour
     {
         // attaching events for spawning units
         deploymentZones = GameObject.FindObjectsOfType<DeploymentZone>();
+        UIManager.Instance.InitializeDeploymentZonesUI(deploymentZones);
         for (int i = 0; i < deploymentZones.Length; i++)
         {
             deploymentZones[i].spawnEvent = new UnityEvent<Soldier>();
             deploymentZones[i].spawnEvent.AddListener(incrementUnitCount);
         }
-
-        //UIManager.Instance.InitializeDeploymentZonesUI(deploymentZones);
+        
         UIManager.Instance.PolulateShop(shopData);
     }
 
