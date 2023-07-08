@@ -8,8 +8,6 @@ using UnityEngine.EventSystems;
 
 public class DragAndDropTroopElement : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
-    public UnityEvent<int> moneyChangeEvent;
-
     private RectTransform rectTransform;
     private LayoutElement layoutElement;
     public Text countText, costText;
@@ -18,6 +16,8 @@ public class DragAndDropTroopElement : MonoBehaviour, IPointerDownHandler, IBegi
 
     private TroopPurchaseData troopData;
     private int troopCount;
+
+    private bool canDrag;
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +54,16 @@ public class DragAndDropTroopElement : MonoBehaviour, IPointerDownHandler, IBegi
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+
+        if(!EconomyManager.Instance.CanAfford(PurchaseCost()))
+        {
+            //TODO: Tell the user they are broke
+            Debug.Log("You do not have: " + PurchaseCost());
+            canDrag = false;
+            return;
+        }
+        
+
         int siblingIndex = transform.GetSiblingIndex();
 
         // replace the dragged element because it will be destroyed on drop
@@ -64,18 +74,29 @@ public class DragAndDropTroopElement : MonoBehaviour, IPointerDownHandler, IBegi
         rectTransform.parent = GetComponentInParent<Canvas>().transform;
         layoutElement.ignoreLayout = true;
 
-        // TODO: change this to informing the economy manager instance because tracking this event may be tedious
-        if (moneyChangeEvent != null)
-            moneyChangeEvent.Invoke(PurchaseCost());
+        EconomyManager.Instance.DecreaseMoney(PurchaseCost());
+
+        canDrag = true;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        if(!canDrag)
+        {
+            return;
+        }
+        
         rectTransform.anchoredPosition += eventData.delta * canvasScale;    // without canvas scale, item will not follow mouse properly
+        
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if(!canDrag)
+        {
+            return;
+        }
+
         layoutElement.ignoreLayout = true;
 
         bool success = false;
@@ -94,8 +115,7 @@ public class DragAndDropTroopElement : MonoBehaviour, IPointerDownHandler, IBegi
         // refund money since troops not deployed on valid area
         if (!success)
         {
-            if (moneyChangeEvent != null)
-                moneyChangeEvent.Invoke(-PurchaseCost());
+            EconomyManager.Instance.IncreaseMoney(PurchaseCost());
         }
 
         Destroy(gameObject);
