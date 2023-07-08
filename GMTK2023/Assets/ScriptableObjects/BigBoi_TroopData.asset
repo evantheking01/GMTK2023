@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BigBoi_TroopData
   m_EditorClassIdentifier: 
   groupName: Big Boi
-  troopPrefab: {fileID: 6351585799888821033, guid: d159c5e0d735f294bb248d17bf69d6c2,
+  troopPrefab: {fileID: 9174094914101912182, guid: 2b25f91e946465b4ea07730ad34570f2,
     type: 3}
-  costPerUnit: 5
+  costPerUnit: 250
   bulkPurcaseCounts: 0100000005000000
