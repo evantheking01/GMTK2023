@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class DeploymentZone : MonoBehaviour
 {
-    [SerializeField] float spawnDelay;
+    [SerializeField] float spawnDelay = 0.05f;
     private float lastSpawnTime;
 
     private Queue<GameObject> deploymentQueue = new Queue<GameObject>();
