@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using Text = TMPro.TextMeshProUGUI;
 public class Turret : MonoBehaviour
 {
     [SerializeField] private float radius = 0.5f;
@@ -17,34 +18,94 @@ public class Turret : MonoBehaviour
 
     float fireCountdown = 0f;
 
+    enum Priority {Speed, Size, Close};
+
+    [SerializeField] private Priority priority;
+
+    [SerializeField] private GameObject helpCanvas;
+
+    [SerializeField] private Text helpText;
+
     void Start()
     {
-        InvokeRepeating("UpdateTarget", 0f, 0.5f);
+        InvokeRepeating("UpdateTarget", 0f, 0.1f);
+        SetHelpText();
+    }
+
+    private void SetHelpText()
+    {
+        switch(priority)
+        {
+            case Priority.Speed: 
+                helpText.text = "This turret targets SPEED. It will attack your FASTEST soldiers first.";
+                break;
+            case Priority.Size:
+                helpText.text = "This turret targets SIZE. It will attack your LARGEST soldiers first.";
+                break;
+            default:
+                helpText.text = "This turret targets PROXIMITY. It will attack your CLOSEST soldiers first.";
+                break;
+        }
     }
 
     private void UpdateTarget()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag(targetTag);
-        float shorestDistance = Mathf.Infinity;
-        GameObject nearestTarget = null;
-        foreach(GameObject enemy in enemies)
+        List<GameObject> enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag(targetTag));
+        if(enemies.Count == 0)
         {
-            float distance = Vector3.Distance(transform.position, enemy.transform.position);
-            if(distance < shorestDistance)
-            {
-                shorestDistance = distance;
-                nearestTarget = enemy;
-            }
+            target = null;
+            return;
         }
 
-        if(nearestTarget != null && shorestDistance <= radius)
+        enemies.RemoveAll((x)=>OutOfRange(transform, x.transform, radius));
+
+        switch(priority)
         {
-            target = nearestTarget.transform;
+            case Priority.Speed: 
+                enemies = SortFastestTarget(enemies);
+                break;
+            case Priority.Size:
+                enemies = SortLargestTarget(enemies);
+                break;
+            default:
+                enemies = SortClosestTarget(enemies);
+                break;
+        }
+
+        if(enemies.Count == 0)
+        {
+            target = null;
+            return;
         }
         else
         {
-            target = null;
+            target = enemies[0].transform;
         }
+
+        
+    }
+
+    private static bool OutOfRange(Transform here,Transform there, float r)
+    {
+        return Vector3.Distance(here.position, there.position) > r;
+    }
+
+    private List<GameObject> SortFastestTarget(List<GameObject> enemies)
+    {
+        enemies.Sort((x,y)=>y.GetComponent<Soldier>().speed.CompareTo(x.GetComponent<Soldier>().speed));
+        return enemies;
+    }
+
+    private List<GameObject> SortClosestTarget(List<GameObject> enemies)
+    {
+        enemies.Sort((x,y)=>Vector3.Distance(transform.position, x.transform.position).CompareTo(Vector3.Distance(transform.position, y.transform.position)));
+        return enemies;
+    }
+
+    private List<GameObject> SortLargestTarget(List<GameObject> enemies)
+    {
+        enemies.Sort((x,y)=>y.GetComponent<Soldier>().size.CompareTo(x.GetComponent<Soldier>().size));
+        return enemies;
     }
 
     void Update()
@@ -66,13 +127,13 @@ public class Turret : MonoBehaviour
 
             fireCountdown -= Time.deltaTime;
         }
-
     }
 
     
 
     void Shoot()
     {
+        Debug.Log("SHOOTING " + target.name);
         GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
                 Bullet bullet = bulletGO.GetComponent<Bullet>();
 
@@ -84,5 +145,15 @@ public class Turret : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, radius);
+    }
+
+    void OnMouseEnter()
+    {
+        helpCanvas.SetActive(true);
+    }
+
+    void OnMouseExit()
+    {
+        helpCanvas.SetActive(false);
     }
 }

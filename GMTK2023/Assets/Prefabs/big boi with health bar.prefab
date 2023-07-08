@@ -127,6 +127,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -2955654122871559345, guid: d159c5e0d735f294bb248d17bf69d6c2,
         type: 3}
+      propertyPath: speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -2955654122871559345, guid: d159c5e0d735f294bb248d17bf69d6c2,
+        type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 2515679899721457787}
