@@ -19,6 +19,9 @@ public class Soldier : MonoBehaviour
 
     [SerializeField] private AudioClip scream;
     [SerializeField] private AudioClip footstep;
+
+    public bool playScreamOnDeath = false;
+
     private AudioSource audioSource;
 
     private Animator animator;
@@ -76,9 +79,13 @@ public class Soldier : MonoBehaviour
     {
         navMeshAgent.speed = 0;
         animator.SetBool("Hopping", false);
-        StopFootstep();
-        PlayScream();
-        yield return new WaitForSeconds(scream.length);
+        
+        if(playScreamOnDeath)
+        {
+            PlayScream();
+            yield return new WaitForSeconds(scream.length);
+        }
+        
         deathEvent.Invoke(transform.position);
         Destroy(gameObject);
     }
@@ -96,6 +103,7 @@ public class Soldier : MonoBehaviour
         if(audioSource != null)
         {
             audioSource.PlayOneShot(scream);
+            Debug.Log("SCREAM");
         }
     }
 
@@ -104,15 +112,6 @@ public class Soldier : MonoBehaviour
         if(audioSource != null)
         {
             audioSource.PlayOneShot(footstep);
-        }
-    }
-
-    public void StopFootstep()
-    {
-        if(audioSource != null)
-        {
-            audioSource.Stop();
-            audioSource.loop = false;
         }
     }
 

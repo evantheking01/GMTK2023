@@ -41,6 +41,10 @@ public class LevelManager : MonoBehaviour
 
             EconomyManager.Instance.attackPhaseOver();
         }
+        else if(currentState == gameState.attack && unitCount == 1 && EconomyManager.Instance.GetMoney() < 50 && !Input.GetMouseButton(0))
+        {
+            GameObject.FindFirstObjectByType<Soldier>().playScreamOnDeath = true;
+        }
     }
 
     public void Initialize()
