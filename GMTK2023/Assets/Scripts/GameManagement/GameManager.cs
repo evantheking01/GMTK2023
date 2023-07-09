@@ -21,9 +21,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] int startingMoney = 100;
     [SerializeField] GameObject sceneChangeSound;
 
+
     private int totalUnitsSpawned;
     private int startingLevelMoney;
     private int totalMoneySpent;
+
+    private LevelManager _levelManagerTmp;
+    [SerializeField] private AudioSource crowdAudioSource;
+    [SerializeField] private float minCrowdVolume = 0.0f;
+    [SerializeField] private float maxCrowdVolume = 1.0f;
+    [SerializeField] private int maxCrowdSize = 32;
 
     void Start()
     {
@@ -54,7 +61,14 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (crowdAudioSource != null)
+        {
+            int unitCount = _levelManagerTmp ? _levelManagerTmp.GetUnitCount() : 0;
+            float crowdNormal = Mathf.Clamp(unitCount / (float)maxCrowdSize, 0.0f, 1.0f);
+            float volume = Mathf.Lerp(minCrowdVolume, maxCrowdVolume, crowdNormal);
+
+            crowdAudioSource.volume = volume;
+        }
     }
 
     public void StartGame()
@@ -75,11 +89,13 @@ public class GameManager : MonoBehaviour
     private void StartLevel()
     {
         // Call level manager to start the first planning phase
-        LevelManager levelManager = GameObject.FindObjectOfType<LevelManager>();
+        LevelManager levelManager = FindObjectOfType<LevelManager>();
         if (levelManager)
         {
             levelManager.Initialize();
         }
+
+        _levelManagerTmp = levelManager;
     }
 
     public void LevelEnd(bool win)
