@@ -81,7 +81,7 @@ public class Tutorial : MonoBehaviour
         Transform moneyTransform = UIManager.Instance.GetMoneyTextTransform();
 
         hintObject.SetParent(moneyTransform);
-        hintObject.anchoredPosition = new Vector2(0, 0);
+        hintObject.anchoredPosition = new Vector2(50, 0);
         hintObject.SetParent(transform);
         hintObject.sizeDelta += new Vector2(0, 0);
         hintRectText.sizeDelta += new Vector2(100, 0);

@@ -30,7 +30,7 @@ public class LevelManager : MonoBehaviour
     private int winCount = 10;
 
     private float minDist = 10000;
-
+    private int moneySpent;
     private bool done;
 
     // Start is called before the first frame update
@@ -49,6 +49,7 @@ public class LevelManager : MonoBehaviour
         {
             currentState = gameState.planning;
 
+            moneySpent = EconomyManager.Instance.MoneySpent;
             EconomyManager.Instance.attackPhaseOver();
             EndWave();
         }
@@ -153,7 +154,7 @@ public class LevelManager : MonoBehaviour
 
         UIManager.Instance.ShowEndWaveUI(
             totalSpawned,
-            EconomyManager.Instance.MoneySpent,
+            moneySpent,
             EconomyManager.Instance.AttackMoney,
             EconomyManager.Instance.GetMoney(),
             currWave
@@ -166,6 +167,7 @@ public class LevelManager : MonoBehaviour
         done = false;
         currWave++;
         totalSpawned = 0;
+        moneySpent = 0;
         UIManager.Instance.SetWaveText(currWave, numWaves);
         UIManager.Instance.UpdatePotentialEarnings(0);
         EconomyManager.Instance.StartPlanningPhase();
