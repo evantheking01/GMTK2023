@@ -48,7 +48,8 @@ public class Turret : MonoBehaviour
     [SerializeField] private float fakeYawSteps = 15.0f;
 
     [SerializeField] private float shootThresholdAngle = 10.0f;
-
+    [SerializeField] private bool useZrotation = false;
+    
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -173,7 +174,10 @@ public class Turret : MonoBehaviour
             if (fakeYawSteps > 0.0f)
                 desiredYaw = Mathf.Round(desiredYaw / fakeYawSteps) * fakeYawSteps;
 
-            yawTransform.localRotation = Quaternion.Euler(0.0f, 0.0f, desiredYaw + 90.0f);
+            if (useZrotation)
+                yawTransform.localRotation = Quaternion.Euler(0.0f, 0.0f, desiredYaw + 90.0f);
+            else
+                yawTransform.localRotation = Quaternion.Euler(0.0f, desiredYaw, 0.0f);
         }
         
         if(target != null)
