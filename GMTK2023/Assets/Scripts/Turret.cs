@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,6 +33,7 @@ public class Turret : MonoBehaviour
     [SerializeField] private Text helpText;
 
     [SerializeField] private AudioClip gunshot;
+    [SerializeField] private GameObject gunFlash;
 
     private AudioSource audioSource;
     
@@ -215,6 +217,16 @@ public class Turret : MonoBehaviour
         {
             audioSource.PlayOneShot(gunshot);
         }
+
+        StartCoroutine(GunFlashHelper());
+    }
+
+    private IEnumerator GunFlashHelper()
+    {
+        gunFlash.SetActive(true);
+        
+        yield return new WaitForSeconds(.1f);
+        gunFlash.SetActive(false);
     }
 
     private void OnDrawGizmos()
