@@ -71,8 +71,8 @@ public class Soldier : MonoBehaviour
 
         if(currentHealth <= 0)
         {
-            Kill();
             isDead = true;
+            Kill();
             StartCoroutine(DeathHelper());
         }  
     }

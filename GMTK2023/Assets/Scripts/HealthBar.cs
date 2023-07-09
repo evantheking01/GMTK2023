@@ -30,13 +30,19 @@ public class HealthBar : MonoBehaviour
 
     public void SetHealth(float health)
     {
-        slider.value = health;
-        // if we are not at full health, show the health bar
-        float alpha = (slider.value < slider.maxValue) ? 1f : .2f;
-        for (int i = 0; i < image.Length; i++)
+        if(slider != null)
         {
-            Color currentColor = image[i].color;
-            image[i].color = new Color(currentColor.r, currentColor.g, currentColor.b, alpha);
+            if(health >= slider.minValue && health <= slider.maxValue)
+            {
+                slider.value = health;
+                // if we are not at full health, show the health bar
+                float alpha = (slider.value < slider.maxValue) ? 1f : .2f;
+                for (int i = 0; i < image.Length; i++)
+                {
+                    Color currentColor = image[i].color;
+                    image[i].color = new Color(currentColor.r, currentColor.g, currentColor.b, alpha);
+                }
+            }
         }
     }
 }
