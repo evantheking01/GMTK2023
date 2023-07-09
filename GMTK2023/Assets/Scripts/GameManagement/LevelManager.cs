@@ -19,6 +19,7 @@ public class LevelManager : MonoBehaviour
 
     private DeploymentZone[] deploymentZones;
     [SerializeField] private int numWaves = 5;
+    [SerializeField] private GameObject winScreen;
     public int Wave { get { return currWave; } }
     private int currWave;
 
@@ -35,7 +36,10 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        
+        if(winScreen != null)
+        {
+            winScreen.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -81,6 +85,10 @@ public class LevelManager : MonoBehaviour
         UIManager.Instance.UpdateGoalProgress($"{goalCount}/{winCount}");
         if (goalCount >= winCount && !done)
         {
+            if(winScreen != null)
+            {
+                winScreen.SetActive(true);
+            }
             done = true;
             GameManager.Instance.WaveComplete(totalSpawned);
             GameManager.Instance.LevelEnd(true);
