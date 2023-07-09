@@ -54,9 +54,6 @@ public class LevelManager : MonoBehaviour
         if(currentState == gameState.attack && unitCount == 0 && EconomyManager.Instance.GetMoney() < 50 && !Input.GetMouseButton(0))
         {
             currentState = gameState.planning;
-
-            moneySpent = EconomyManager.Instance.MoneySpent;
-            EconomyManager.Instance.attackPhaseOver();
             EndWave();
         }
         else if(currentState == gameState.attack && unitCount == 1 && EconomyManager.Instance.GetMoney() < 50 && !Input.GetMouseButton(0))
@@ -148,6 +145,15 @@ public class LevelManager : MonoBehaviour
     public void EndWave()
     {
         if (done) return;   // so we dont show ui again when money is spent after all guys make it
+
+        Soldier[] allSoldiers = FindObjectsOfType<Soldier>();
+        for (int i = 0; i < allSoldiers.Length; i++)
+        {
+            if (allSoldiers[i] != null)
+                allSoldiers[i].Kill();
+        }
+
+        EconomyManager.Instance.attackPhaseOver();
         done = true;
         GameManager.Instance.WaveComplete(totalSpawned);
         if (currWave >= numWaves)
