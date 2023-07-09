@@ -883,6 +883,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d774c0a5c0295da45bff504b30049a9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doColorFlash: 0
+  colorFlash: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1004490502249384572
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,6 +1071,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d774c0a5c0295da45bff504b30049a9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doColorFlash: 0
+  colorFlash: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1212178881345760814
 GameObject:
   m_ObjectHideFlags: 0
@@ -3083,6 +3087,7 @@ GameObject:
   - component: {fileID: 3321930394293145615}
   - component: {fileID: 5317546769762193362}
   - component: {fileID: 76452942334533416}
+  - component: {fileID: 5768892271817419951}
   m_Layer: 5
   m_Name: Money
   m_TagString: Untagged
@@ -3242,6 +3247,20 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!114 &5768892271817419951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3950818150204203471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d774c0a5c0295da45bff504b30049a9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doColorFlash: 0
+  colorFlash: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &4213774714910609079
 GameObject:
   m_ObjectHideFlags: 0
@@ -4325,6 +4344,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d774c0a5c0295da45bff504b30049a9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doColorFlash: 0
+  colorFlash: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &5103683475704145562
 GameObject:
   m_ObjectHideFlags: 0
@@ -4504,9 +4525,10 @@ MonoBehaviour:
     type: 3}
   deploymentZonesPanel: {fileID: 7328542264771161537}
   goalProgressElement: {fileID: 1999462606383447628}
-  moneyText: {fileID: 3321930394293145615}
-  potentialEarningsText: {fileID: 2594092402749838569}
   waveText: {fileID: 6846437977927335063}
+  moneyText: {fileID: 5768892271817419951}
+  potentialEarningsText: {fileID: 3561902527869662706}
+  retreatButton: {fileID: 0}
 --- !u!1 &5482786500822925979
 GameObject:
   m_ObjectHideFlags: 0
@@ -4790,6 +4812,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d774c0a5c0295da45bff504b30049a9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doColorFlash: 0
+  colorFlash: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &5945579264200107768
 GameObject:
   m_ObjectHideFlags: 0
@@ -6933,6 +6957,7 @@ GameObject:
   - component: {fileID: 2594092402749838569}
   - component: {fileID: 4615479049250936776}
   - component: {fileID: 7670418591266429546}
+  - component: {fileID: 3561902527869662706}
   m_Layer: 5
   m_Name: PotentialEarning
   m_TagString: Untagged
@@ -7092,6 +7117,20 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!114 &3561902527869662706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8516573514621579330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d774c0a5c0295da45bff504b30049a9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doColorFlash: 0
+  colorFlash: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &8552977007683954314
 GameObject:
   m_ObjectHideFlags: 0
