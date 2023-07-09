@@ -225,7 +225,7 @@ public class Turret : MonoBehaviour
     {
         gunFlash.SetActive(true);
         
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.3f);
         gunFlash.SetActive(false);
     }
 

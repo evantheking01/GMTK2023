@@ -3512,6 +3512,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1850001502}
     m_Modifications:
+    - target: {fileID: 425683626833310858, guid: 346e9d09bba0a2a42afd701d503bb8b4,
+        type: 3}
+      propertyPath: radius
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 425683626833310858, guid: 346e9d09bba0a2a42afd701d503bb8b4,
+        type: 3}
+      propertyPath: fireRate
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 425683626833310858, guid: 346e9d09bba0a2a42afd701d503bb8b4,
+        type: 3}
+      propertyPath: priority
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1609797427268804933, guid: 346e9d09bba0a2a42afd701d503bb8b4,
         type: 3}
       propertyPath: m_RootOrder
@@ -6816,7 +6831,7 @@ PrefabInstance:
     - target: {fileID: 5481226889009272412, guid: 4f5feadfafec82a41bfe50eb4edfffe7,
         type: 3}
       propertyPath: radius
-      value: 8
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 6894529354896704403, guid: 4f5feadfafec82a41bfe50eb4edfffe7,
         type: 3}
@@ -7741,7 +7756,12 @@ PrefabInstance:
     - target: {fileID: 425683626833310858, guid: 346e9d09bba0a2a42afd701d503bb8b4,
         type: 3}
       propertyPath: radius
-      value: 8
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 425683626833310858, guid: 346e9d09bba0a2a42afd701d503bb8b4,
+        type: 3}
+      propertyPath: priority
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1609797427268804933, guid: 346e9d09bba0a2a42afd701d503bb8b4,
         type: 3}
@@ -8483,6 +8503,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Size Turret (Red)
       objectReference: {fileID: 0}
+    - target: {fileID: 5216631236200932469, guid: a07ae567ee43a7c428740fc27e3c5664,
+        type: 3}
+      propertyPath: radius
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5216631236200932469, guid: a07ae567ee43a7c428740fc27e3c5664,
+        type: 3}
+      propertyPath: fireRate
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6618674361033175482, guid: a07ae567ee43a7c428740fc27e3c5664,
         type: 3}
       propertyPath: m_RootOrder
@@ -8770,6 +8800,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e74f48f2f03a1d64b919f4f5643d4e5d, type: 2}
   - {fileID: 11400000, guid: bdeb316e7ecc5ee4fabe7d07ebc1b52f, type: 2}
   numWaves: 5
+  winScreen: {fileID: 0}
 --- !u!4 &1677453378
 Transform:
   m_ObjectHideFlags: 0
@@ -8793,31 +8824,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1850001502}
     m_Modifications:
-    - target: {fileID: 134761349548959502, guid: 60725c3cf1ef437489f09c19d3a9e3eb,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 134761349548959502, guid: 60725c3cf1ef437489f09c19d3a9e3eb,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 134761349548959502, guid: 60725c3cf1ef437489f09c19d3a9e3eb,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 134761349548959502, guid: 60725c3cf1ef437489f09c19d3a9e3eb,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 134761349548959502, guid: 60725c3cf1ef437489f09c19d3a9e3eb,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1140937005197886909, guid: 60725c3cf1ef437489f09c19d3a9e3eb,
         type: 3}
       propertyPath: m_Name
@@ -8826,27 +8832,17 @@ PrefabInstance:
     - target: {fileID: 7475009992460689417, guid: 60725c3cf1ef437489f09c19d3a9e3eb,
         type: 3}
       propertyPath: radius
-      value: 32
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 7475009992460689417, guid: 60725c3cf1ef437489f09c19d3a9e3eb,
+        type: 3}
+      propertyPath: priority
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8359774648358270406, guid: 60725c3cf1ef437489f09c19d3a9e3eb,
         type: 3}
       propertyPath: m_RootOrder
       value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8359774648358270406, guid: 60725c3cf1ef437489f09c19d3a9e3eb,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8359774648358270406, guid: 60725c3cf1ef437489f09c19d3a9e3eb,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8359774648358270406, guid: 60725c3cf1ef437489f09c19d3a9e3eb,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8359774648358270406, guid: 60725c3cf1ef437489f09c19d3a9e3eb,
         type: 3}
@@ -10421,6 +10417,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Size Turret (Red) (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5216631236200932469, guid: a07ae567ee43a7c428740fc27e3c5664,
+        type: 3}
+      propertyPath: radius
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5216631236200932469, guid: a07ae567ee43a7c428740fc27e3c5664,
+        type: 3}
+      propertyPath: fireRate
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5216631236200932469, guid: a07ae567ee43a7c428740fc27e3c5664,
+        type: 3}
+      propertyPath: priority
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6618674361033175482, guid: a07ae567ee43a7c428740fc27e3c5664,
         type: 3}
