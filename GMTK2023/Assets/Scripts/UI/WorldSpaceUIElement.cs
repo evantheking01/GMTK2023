@@ -19,7 +19,9 @@ public class WorldSpaceUIElement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (target == null) return;
+        if (target == null)
+            return;
+        
         Vector2 screenPos = Camera.main.WorldToScreenPoint(target.position);
         transform.position = screenPos + offset;
     }
