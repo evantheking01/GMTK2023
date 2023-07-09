@@ -16,10 +16,25 @@ public class Soldier : MonoBehaviour
     [SerializeField] private Transform movePositionTransform;
     public UnityEvent<Vector3> deathEvent;
 
-    private NavMeshAgent navMeshAgent;
+    [SerializeField] private NavMeshAgent navMeshAgent;
+
+    [SerializeField] private AudioClip scream;
+    [SerializeField] private AudioClip footstep;
+
+    public bool playScreamOnDeath = false;
+
+    private AudioSource audioSource;
+
+    private Animator animator;
+
+    private bool isDead;
+
     private void Awake() 
-    {
-        navMeshAgent = GetComponent<NavMeshAgent>();
+    {   isDead = false;
+        audioSource = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
+        animator.SetBool("Hopping", true);
+
         GameObject goalObj = GameObject.FindGameObjectWithTag("Goal");
         if (goalObj)
             movePositionTransform = goalObj.transform;
@@ -39,18 +54,42 @@ public class Soldier : MonoBehaviour
     void Update()
     {
         if(!(navMeshAgent == null) && movePositionTransform != null)
+        {
             navMeshAgent.destination = movePositionTransform.position;
+        }
     }
 
     public void TakeDamage(float damage)
     {
+        if(isDead)
+        {
+            return;
+        }
+
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
 
         if(currentHealth <= 0)
         {
             Kill();
+            isDead = true;
+            StartCoroutine(DeathHelper());
         }  
+    }
+
+    public IEnumerator DeathHelper()
+    {
+        navMeshAgent.speed = 0;
+        animator.SetBool("Hopping", false);
+        
+        if(playScreamOnDeath)
+        {
+            PlayScream();
+            yield return new WaitForSeconds(scream.length);
+        }
+        
+        deathEvent.Invoke(transform.position);
+        Destroy(gameObject);
     }
 
     public void Kill()
@@ -74,5 +113,33 @@ public class Soldier : MonoBehaviour
 
         Destroy(newDeathAnimation, longestSoFar);
         Destroy(gameObject);
+    }
+
+    public void PlayScream()
+    {
+        if(audioSource != null)
+        {
+            audioSource.PlayOneShot(scream);
+            Debug.Log("SCREAM");
+        }
+    }
+
+    public void PlayFootstep()
+    {
+        if(audioSource != null)
+        {
+            audioSource.PlayOneShot(footstep);
+        }
+    }
+
+    public void Move()
+    {
+        navMeshAgent.speed = speed;
+    }
+
+    public void StopMoving()
+    {
+        navMeshAgent.speed = 0;
+        PlayFootstep();
     }
 }

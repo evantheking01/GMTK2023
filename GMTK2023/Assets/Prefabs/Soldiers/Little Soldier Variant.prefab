@@ -1,0 +1,130 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3969468215408642812
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1040656977802453987, guid: b83fb049b58b81d4481de367544ceac3,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040656977802453987, guid: b83fb049b58b81d4481de367544ceac3,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040656977802453987, guid: b83fb049b58b81d4481de367544ceac3,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040656977802453987, guid: b83fb049b58b81d4481de367544ceac3,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040656977802453987, guid: b83fb049b58b81d4481de367544ceac3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040656977802453987, guid: b83fb049b58b81d4481de367544ceac3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040656977802453987, guid: b83fb049b58b81d4481de367544ceac3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040656977802453987, guid: b83fb049b58b81d4481de367544ceac3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040656977802453987, guid: b83fb049b58b81d4481de367544ceac3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040656977802453987, guid: b83fb049b58b81d4481de367544ceac3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040656977802453987, guid: b83fb049b58b81d4481de367544ceac3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040656977802453987, guid: b83fb049b58b81d4481de367544ceac3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040656977802453987, guid: b83fb049b58b81d4481de367544ceac3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040656977802453987, guid: b83fb049b58b81d4481de367544ceac3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040656977802453987, guid: b83fb049b58b81d4481de367544ceac3,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4263370581765861882, guid: b83fb049b58b81d4481de367544ceac3,
+        type: 3}
+      propertyPath: size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4263370581765861882, guid: b83fb049b58b81d4481de367544ceac3,
+        type: 3}
+      propertyPath: speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4263370581765861882, guid: b83fb049b58b81d4481de367544ceac3,
+        type: 3}
+      propertyPath: scream
+      value: 
+      objectReference: {fileID: 8300000, guid: 83f026736ac741b46b5bbf87d5833bb2, type: 3}
+    - target: {fileID: 4263370581765861882, guid: b83fb049b58b81d4481de367544ceac3,
+        type: 3}
+      propertyPath: footstep
+      value: 
+      objectReference: {fileID: 8300000, guid: 321c0d5d6b2226c4584d98c237592259, type: 3}
+    - target: {fileID: 4263370581765861882, guid: b83fb049b58b81d4481de367544ceac3,
+        type: 3}
+      propertyPath: maxHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7367814226231408801, guid: b83fb049b58b81d4481de367544ceac3,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7367814226231408801, guid: b83fb049b58b81d4481de367544ceac3,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992316765269897915, guid: b83fb049b58b81d4481de367544ceac3,
+        type: 3}
+      propertyPath: m_Name
+      value: Little Soldier Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b83fb049b58b81d4481de367544ceac3, type: 3}

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,8 @@ public class Turret : MonoBehaviour
     [SerializeField] private Transform gun;
     [SerializeField] private Transform firePoint;
 
+    [SerializeField] private float rotationRate = 5.0f;
+    
     [SerializeField] private GameObject bulletPrefab;
 
     private Transform target;
@@ -28,10 +31,33 @@ public class Turret : MonoBehaviour
 
     [SerializeField] private Text helpText;
 
+    [SerializeField] private AudioClip gunshot;
+
+    private AudioSource audioSource;
+    
+    [SerializeField] private Transform pitchTransform;
+    [SerializeField] private Transform yawTransform;
+    private Quaternion _startingPitch;
+    private Quaternion _startingYaw;
+    private float _currentYaw;
+
+    [SerializeField] private float rotationSpeed = 5.0f;
+    
+    [SerializeField] private float fakeYawSteps = 15.0f;
+
+    [SerializeField] private float shootThresholdAngle = 10.0f;
+
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         InvokeRepeating("UpdateTarget", 0f, 0.1f);
         SetHelpText();
+
+        if (pitchTransform != null)
+            _startingPitch = pitchTransform.rotation;
+
+        if (yawTransform != null)
+            _startingYaw = yawTransform.rotation;
     }
 
     private void SetHelpText()
@@ -89,7 +115,13 @@ public class Turret : MonoBehaviour
 
     private static bool OutOfRange(Transform here,Transform there, float r)
     {
-        return Vector3.Distance(here.position, there.position) > r;
+        Vector3 herePosition = here.position;
+        herePosition.y = 0.0f;
+
+        Vector3 therePosition = there.position;
+        therePosition.y = 0.0f;
+        
+        return Vector3.Distance(herePosition, therePosition) > r;
     }
 
     private List<GameObject> SortFastestTarget(List<GameObject> enemies)
@@ -112,6 +144,7 @@ public class Turret : MonoBehaviour
 
     void Update()
     {
+        
         if(target != null)
         {
             // Vector3 direction = target.position - transform.position;
@@ -119,9 +152,38 @@ public class Turret : MonoBehaviour
             // Vector3 rotation = Quaternion.Lerp(gun.rotation, lookRotation, Time.deltaTime).eulerAngles;
             // gun.rotation = Quaternion.Euler(0f, rotation.y, 0f);
 
-            gun.LookAt(target);
+            bool isFacing = true;
+            if (yawTransform != null)
+            {
+                Vector3 from = transform.position;
+                Vector3 to = target.position;
 
-            if(fireCountdown <= 0f)
+                Vector3 direction = (to - from).normalized;
+
+                Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
+                float targetYaw = rotation.eulerAngles.y;
+                
+                _currentYaw = Mathf.MoveTowardsAngle(_currentYaw, targetYaw, rotationSpeed * Time.deltaTime);
+
+                if (Mathf.Abs(_currentYaw - targetYaw) > shootThresholdAngle)
+                    isFacing = false;
+                
+                float desiredYaw = _currentYaw;
+                if (fakeYawSteps > 0.0f)
+                    desiredYaw = Mathf.Round(_currentYaw / fakeYawSteps) * fakeYawSteps;
+                        
+                yawTransform.rotation = Quaternion.Euler(0.0f, desiredYaw, 0.0f) * _startingYaw;
+            }
+
+            if (pitchTransform != null)
+            {
+                
+            }
+
+            if (gun != null)
+                gun.LookAt(target);
+
+            if(fireCountdown <= 0f && isFacing)
             {
                 Shoot();
                 fireCountdown = 1f / fireRate;
@@ -136,11 +198,18 @@ public class Turret : MonoBehaviour
     void Shoot()
     {
         GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-                Bullet bullet = bulletGO.GetComponent<Bullet>();
-                bullet.damage = damage;
+        Bullet bullet = bulletGO.GetComponent<Bullet>();
+        bullet.damage = damage;
 
-                if (bullet != null)
-                    bullet.Seek(target);
+        if (bullet != null)
+        {
+            bullet.Seek(target);
+        }
+            
+        if(audioSource != null)
+        {
+            audioSource.PlayOneShot(gunshot);
+        }
     }
 
     private void OnDrawGizmos()
