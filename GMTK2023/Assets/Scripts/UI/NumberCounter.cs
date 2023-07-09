@@ -37,9 +37,8 @@ public class NumberCounter : MonoBehaviour
         {
             if (doColorFlash)
             {
-                float colorVal = t / timeToCount / 4f;
-                //if (t > timeToCount * 0.75f)
-                 //   colorVal = 1f - (t / )
+                float colorVal = 2f * t / timeToCount;
+                colorVal = Mathf.Clamp(colorVal, 0, 1);
                 Color.Lerp(startColor, colorFlash, colorVal);
             }
             t += Time.deltaTime;
@@ -48,6 +47,8 @@ public class NumberCounter : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
+        if (doColorFlash)
+            text.color = startColor;
         val = endVal;
         if (isInt)
             text.text = prefix + ((int)val).ToString(format) + suffix;

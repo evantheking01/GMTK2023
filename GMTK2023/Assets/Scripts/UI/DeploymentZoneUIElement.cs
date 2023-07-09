@@ -6,7 +6,7 @@ using Text = TMPro.TextMeshProUGUI;
 
 public class DeploymentZoneUIElement : MonoBehaviour
 {
-    private Vector2 offset = new Vector2(0, 50);
+    private Vector2 offset = new Vector2(0, 25);
 
     private RectTransform rectTransform;
     public DeploymentZone ZoneOfDeployment { get { return deploymentZone; } }

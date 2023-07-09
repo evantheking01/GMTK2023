@@ -21,6 +21,10 @@ public class Soldier : MonoBehaviour
     [SerializeField] private AudioClip scream;
     [SerializeField] private AudioClip footstep;
 
+    [SerializeField] private GameObject flagPrefab;
+
+    private GameObject flagInstance;
+
     public bool playScreamOnDeath = false;
 
     private AudioSource audioSource;
@@ -86,6 +90,11 @@ public class Soldier : MonoBehaviour
         {
             PlayScream();
             yield return new WaitForSeconds(scream.length);
+            if(flagInstance != null)
+            {
+                Destroy(flagInstance);
+            }
+            flagInstance = Instantiate(flagPrefab, transform.position, Quaternion.identity);
         }
         
         deathEvent.Invoke(transform.position);

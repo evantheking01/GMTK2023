@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Soldier
   - Goal
+  - WinScreen
   layers:
   - Default
   - TransparentFX
