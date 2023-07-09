@@ -7,5 +7,7 @@ public class TroopPurchaseData : ScriptableObject
     public GameObject troopPrefab;
     public int costPerUnit;
     public int[] bulkPurcaseCounts;
-    
+    public Texture thumbnail;
+    public string description;
+
 }

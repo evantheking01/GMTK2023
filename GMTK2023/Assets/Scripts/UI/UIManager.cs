@@ -12,8 +12,10 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] GameObject deploymentZoneUIPrefab;
     [SerializeField] RectTransform deploymentZonesPanel;
-    [SerializeField] Text moneyText;
-
+    [SerializeField] WorldSpaceUIElement goalProgressElement;
+    [SerializeField] Text moneyText, potentialEarningsText, waveText;
+    private CanvasScaler canvasScaler;
+    
     private TroopShopUI shopUI;
 
     public float CanvasScale { get { return canvasScale; } }
@@ -41,13 +43,26 @@ public class UIManager : MonoBehaviour
             EconomyManager.Instance.moneyChangeEvent = new UnityEngine.Events.UnityEvent<int>();
         EconomyManager.Instance.moneyChangeEvent.AddListener(UpdateMoneyText);
 
-        CanvasScaler canvasScaler = GetComponentInParent<CanvasScaler>();
+        canvasScaler = GetComponentInParent<CanvasScaler>();
         // Assuming match will be either 0 or 1. Otherwise this is some more math
         if (canvasScaler.matchWidthOrHeight > 0.5f)
             canvasScale = canvasScaler.referenceResolution.y / Screen.height;
         else
             canvasScale = canvasScaler.referenceResolution.x / Screen.width;
+        StartCoroutine(RefreshCanvasScale());
+    }
 
+    private IEnumerator RefreshCanvasScale()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(2f);
+            // Assuming match will be either 0 or 1. Otherwise this is some more math
+            if (canvasScaler.matchWidthOrHeight > 0.5f)
+                canvasScale = canvasScaler.referenceResolution.y / Screen.height;
+            else
+                canvasScale = canvasScaler.referenceResolution.x / Screen.width;
+        }
     }
 
     // Update is called once per frame
@@ -60,6 +75,8 @@ public class UIManager : MonoBehaviour
     {
         shopUI = GetComponentInChildren<TroopShopUI>();
         shopUI.Initialize(shopData);
+        GoalManager goal = GameObject.FindObjectOfType<GoalManager>();
+        goalProgressElement.target = goal.transform;
     }
 
     public void InitializeDeploymentZonesUI(DeploymentZone[] deploymentZones)
@@ -82,8 +99,32 @@ public class UIManager : MonoBehaviour
         moneyText.text = money.ToString("C");
     }
 
+    public void UpdatePotentialEarnings(int value)
+    {
+        potentialEarningsText.text = $"+{value.ToString("C")}";
+    }
+
     public Transform GetMoneyTextTransform()
     {
         return moneyText.transform;
+    }
+
+    public void SetWaveText(int currWave, int numWaves)
+    {
+        waveText.text = $"Wave: {currWave}/{numWaves}";
+        shopUI.EnableShop();
+    }
+
+    public void ShowEndWaveUI(int numTroops, int moneySpent, int moneyEarned, int balance, int wave, bool levelComplete=false)
+    {
+        WaveEndScreen endScreen = GetComponentInChildren<WaveEndScreen>();
+        endScreen.SetWaveText(wave, levelComplete);
+        endScreen.Populate(numTroops, moneySpent, moneyEarned, balance);
+        shopUI.DisableShop();
+    }
+
+    public void UpdateGoalProgress(string str)
+    {
+        goalProgressElement.SetText(str);
     }
 }

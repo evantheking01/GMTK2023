@@ -14,7 +14,7 @@ public class GoalManager : MonoBehaviour
             Soldier soldier = collider.gameObject.GetComponent<Soldier>();
             soldier.Kill();
 
-            if(goalEvent != null)
+            if (goalEvent != null)
             {
                 goalEvent.Invoke();
             }

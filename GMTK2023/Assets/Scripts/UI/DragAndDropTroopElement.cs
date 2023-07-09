@@ -20,6 +20,8 @@ public class DragAndDropTroopElement : MonoBehaviour, IPointerDownHandler, IBegi
 
     private bool canDrag;
 
+    private bool canUse=true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +41,11 @@ public class DragAndDropTroopElement : MonoBehaviour, IPointerDownHandler, IBegi
         countText.text = troopCount.ToString();
         costText.text = PurchaseCost().ToString();
         layoutElement = GetComponent<LayoutElement>();
+
+        if (count < 0)
+        {
+            // use this to buy all you can
+        }
     }
 
     private int PurchaseCost()
@@ -55,7 +62,8 @@ public class DragAndDropTroopElement : MonoBehaviour, IPointerDownHandler, IBegi
             canDrag = false;
             return;
         }
-        
+
+        if (!canUse) return;
 
         int siblingIndex = transform.GetSiblingIndex();
 
@@ -77,7 +85,7 @@ public class DragAndDropTroopElement : MonoBehaviour, IPointerDownHandler, IBegi
 
     public void OnDrag(PointerEventData eventData)
     {
-        if(!canDrag)
+        if(!canDrag || !canUse)
         {
             return;
         }
@@ -87,7 +95,7 @@ public class DragAndDropTroopElement : MonoBehaviour, IPointerDownHandler, IBegi
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if(!canDrag)
+        if(!canDrag || !canUse)
         {
             return;
         }
@@ -114,9 +122,7 @@ public class DragAndDropTroopElement : MonoBehaviour, IPointerDownHandler, IBegi
         if (!success)
         {
             EconomyManager.Instance.IncreaseMoney(PurchaseCost());
-        }
-
-        
+        }     
 
         Destroy(gameObject);
     }
@@ -124,5 +130,11 @@ public class DragAndDropTroopElement : MonoBehaviour, IPointerDownHandler, IBegi
     public void OnPointerDown(PointerEventData eventData)
     {
 
+    }
+
+    public void SetCanUse(bool val)
+    {
+        canUse = val;
+        GetComponent<Button>().interactable = val;
     }
 }
