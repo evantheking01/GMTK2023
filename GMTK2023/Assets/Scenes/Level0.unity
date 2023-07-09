@@ -8770,6 +8770,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e74f48f2f03a1d64b919f4f5643d4e5d, type: 2}
   - {fileID: 11400000, guid: bdeb316e7ecc5ee4fabe7d07ebc1b52f, type: 2}
   numWaves: 5
+  winScreen: {fileID: 0}
 --- !u!4 &1677453378
 Transform:
   m_ObjectHideFlags: 0
@@ -8793,60 +8794,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1850001502}
     m_Modifications:
-    - target: {fileID: 134761349548959502, guid: 60725c3cf1ef437489f09c19d3a9e3eb,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 134761349548959502, guid: 60725c3cf1ef437489f09c19d3a9e3eb,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 134761349548959502, guid: 60725c3cf1ef437489f09c19d3a9e3eb,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 134761349548959502, guid: 60725c3cf1ef437489f09c19d3a9e3eb,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 134761349548959502, guid: 60725c3cf1ef437489f09c19d3a9e3eb,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1140937005197886909, guid: 60725c3cf1ef437489f09c19d3a9e3eb,
         type: 3}
       propertyPath: m_Name
       value: TankTurret (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 7475009992460689417, guid: 60725c3cf1ef437489f09c19d3a9e3eb,
-        type: 3}
-      propertyPath: radius
-      value: 32
-      objectReference: {fileID: 0}
     - target: {fileID: 8359774648358270406, guid: 60725c3cf1ef437489f09c19d3a9e3eb,
         type: 3}
       propertyPath: m_RootOrder
       value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8359774648358270406, guid: 60725c3cf1ef437489f09c19d3a9e3eb,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8359774648358270406, guid: 60725c3cf1ef437489f09c19d3a9e3eb,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8359774648358270406, guid: 60725c3cf1ef437489f09c19d3a9e3eb,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8359774648358270406, guid: 60725c3cf1ef437489f09c19d3a9e3eb,
         type: 3}

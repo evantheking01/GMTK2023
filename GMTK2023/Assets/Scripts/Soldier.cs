@@ -137,7 +137,7 @@ public class Soldier : MonoBehaviour
     {
         if(audioSource != null)
         {
-            audioSource.PlayOneShot(footstep);
+            //audioSource.PlayOneShot(footstep);
         }
     }
 
