@@ -100,6 +100,7 @@ public class LevelManager : MonoBehaviour
 
         unitCount++;
         totalSpawned++;
+        Debug.Log("Unit count = " + unitCount.ToString());
     }
 
     private void decrementUnitCount(Vector3 position)
@@ -128,6 +129,7 @@ public class LevelManager : MonoBehaviour
             // TODO: place a flag marker here
         }
         unitCount--;
+        Debug.Log("Unit count = " + unitCount.ToString());
     }
 
     public void EndWave()

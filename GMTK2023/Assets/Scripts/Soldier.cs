@@ -98,7 +98,6 @@ public class Soldier : MonoBehaviour
         TakeDamage(10);
 
         healthBar.SetHealth(currentHealth);
-        deathEvent.Invoke(transform.position);
 
         GameObject newDeathAnimation = Instantiate(deathAnimation, transform.position, transform.rotation) as GameObject;
         ParticleSystem[] newParticles = newDeathAnimation.GetComponentsInChildren<ParticleSystem>();
@@ -114,7 +113,6 @@ public class Soldier : MonoBehaviour
         }
 
         Destroy(newDeathAnimation, longestSoFar);
-        Destroy(gameObject);
     }
 
     public void PlayScream()
