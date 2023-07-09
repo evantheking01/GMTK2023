@@ -2410,7 +2410,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5129608023405260966
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5596,7 +5596,7 @@ MonoBehaviour:
   waveText: {fileID: 6846437977927335063}
   moneyText: {fileID: 5768892271817419951}
   potentialEarningsText: {fileID: 3561902527869662706}
-  retreatButton: {fileID: 0}
+  retreatButton: {fileID: 3307983567207074160}
 --- !u!1 &5482786500822925979
 GameObject:
   m_ObjectHideFlags: 0
