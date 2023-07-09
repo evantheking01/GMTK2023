@@ -47,7 +47,7 @@ public class DeploymentZone : MonoBehaviour
         {
             if (troopDatabase[i] == troopData.troopPrefab)
             {
-                Debug.Log("prefabs same");
+                //Debug.Log("prefabs same");
                 troopID = i;
             }
         }

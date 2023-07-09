@@ -18,10 +18,19 @@ public class LevelManager : MonoBehaviour
     private gameState currentState = gameState.planning;
 
     private DeploymentZone[] deploymentZones;
+    [SerializeField] private int numWaves = 5;
+    public int Wave { get { return currWave; } }
+    private int currWave;
+
+    private int totalSpawned = 0;
     private int unitCount = 0;
     private int goalCount = 0;
 
     private int winCount = 10;
+
+    private float minDist = 10000;
+
+    private bool done;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -34,12 +43,10 @@ public class LevelManager : MonoBehaviour
     {
         if(currentState == gameState.attack && unitCount == 0 && EconomyManager.Instance.GetMoney() < 50 && !Input.GetMouseButton(0))
         {
-            // todo: change this state transition to go to review once we know wtf that means
             currentState = gameState.planning;
 
-            //todo: increment wave number
-
             EconomyManager.Instance.attackPhaseOver();
+            EndWave();
         }
         else if(currentState == gameState.attack && unitCount == 1 && EconomyManager.Instance.GetMoney() < 50 && !Input.GetMouseButton(0))
         {
@@ -62,15 +69,21 @@ public class LevelManager : MonoBehaviour
 
         GoalManager goalManager = GameObject.FindObjectOfType<GoalManager>();
         goalManager.goalEvent.AddListener(GoalReached);
+
+        currWave = 0;
+        StartWave();
+        UIManager.Instance.UpdateGoalProgress($"{goalCount}/{winCount}");
     }
 
     public void GoalReached()
     {
         goalCount++;
-
-        if(goalCount > winCount)
+        UIManager.Instance.UpdateGoalProgress($"{goalCount}/{winCount}");
+        if (goalCount >= winCount && !done)
         {
-            Debug.Log("LEVEL WON");
+            done = true;
+            GameManager.Instance.WaveComplete(totalSpawned);
+            GameManager.Instance.LevelEnd(true);
         }
     }
 
@@ -86,10 +99,63 @@ public class LevelManager : MonoBehaviour
         soldier.deathEvent.AddListener(decrementUnitCount);
 
         unitCount++;
+        totalSpawned++;
     }
 
     private void decrementUnitCount(Vector3 position)
     {
+        // compute the distance the unit traveled from spawn
+        NavMeshPath path = new NavMeshPath();
+
+        // compute the distance form their death position to the goal at time of death
+        Vector3 goalPosition = new Vector3(0, 0, 0);
+        GameObject goalObj = GameObject.FindGameObjectWithTag("Goal");
+        if (goalObj)
+            goalPosition = goalObj.transform.position;
+        float distanceToGoal = 0f;
+        if (NavMesh.CalculatePath(goalPosition, position, NavMesh.AllAreas, path))
+        {
+            distanceToGoal = Vector3.Distance(goalPosition, path.corners[0]);
+            for (int i = 1; i < path.corners.Length; i++)
+            {
+                distanceToGoal += Vector3.Distance(path.corners[i], path.corners[i - 1]);
+            }
+        }
+
+        if (distanceToGoal < minDist)
+        {
+            minDist = distanceToGoal;
+            // TODO: place a flag marker here
+        }
         unitCount--;
+    }
+
+    public void EndWave()
+    {
+        GameManager.Instance.WaveComplete(totalSpawned);
+        if (currWave >= numWaves)
+        {
+            GameManager.Instance.LevelEnd(false);
+            return;
+        }
+
+        UIManager.Instance.ShowEndWaveUI(
+            totalSpawned,
+            EconomyManager.Instance.MoneySpent,
+            EconomyManager.Instance.AttackMoney,
+            EconomyManager.Instance.GetMoney(),
+            currWave
+            );
+
+    }
+
+    public void StartWave()
+    {
+        currWave++;
+        totalSpawned = 0;
+        UIManager.Instance.SetWaveText(currWave, numWaves);
+        UIManager.Instance.UpdatePotentialEarnings(0);
+        EconomyManager.Instance.StartPlanningPhase();
+        // ui manager to update wave
     }
 }

@@ -17,3 +17,5 @@ MonoBehaviour:
     type: 3}
   costPerUnit: 50
   bulkPurcaseCounts: 010000000a00000019000000
+  thumbnail: {fileID: 0}
+  description: Just a little guy

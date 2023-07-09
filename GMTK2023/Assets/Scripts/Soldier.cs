@@ -95,6 +95,8 @@ public class Soldier : MonoBehaviour
     public void Kill()
     {
         currentHealth = 0;
+        TakeDamage(10);
+
         healthBar.SetHealth(currentHealth);
         deathEvent.Invoke(transform.position);
 

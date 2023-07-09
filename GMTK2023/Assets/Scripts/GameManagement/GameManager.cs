@@ -18,6 +18,10 @@ public class GameManager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject pauseButton;
 
+    private int totalUnitsSpawned;
+    private int startingLevelMoney;
+    private int totalMoneySpent;
+
     void Start()
     {
         if (_instance != null && _instance != this)
@@ -32,11 +36,15 @@ public class GameManager : MonoBehaviour
         
         economyManager.Initialize();
         uiManager.Initialize();
-        economyManager.SetMoney(100);
+        economyManager.SetMoney(10000);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
 
-        // StartLevel();
+        if (SceneManager.GetActiveScene().name != "Start Menu") // for testing
+        {
+            Debug.Log("starting a test level");
+            StartLevel();
+        }
     }
 
     // Update is called once per frame
@@ -70,11 +78,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void LoadNextLevel()
+    public void LevelEnd(bool win)
+    {
+        LevelManager lm = FindObjectOfType<LevelManager>();
+        UIManager.Instance.ShowEndWaveUI(
+            totalUnitsSpawned,
+            totalMoneySpent,
+            EconomyManager.Instance.GetMoney() - startingLevelMoney,
+            EconomyManager.Instance.GetMoney(),
+            lm.Wave,
+            win
+            );
+
+        totalUnitsSpawned = 0;
+        totalMoneySpent = 0;
+        startingLevelMoney = EconomyManager.Instance.GetMoney();
+    }
+
+    public void LoadNextLevel()
     {
         currLevel++;
+        totalUnitsSpawned = 0;
         LoadScene.LoadLevel(currLevel);
-
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -92,6 +117,8 @@ public class GameManager : MonoBehaviour
         pauseMenu.SetActive(false);
 
         startMenu.SetActive(true);
+
+        startingLevelMoney = EconomyManager.Instance.GetMoney();
     }
 
     public void QuitGame()
@@ -118,6 +145,16 @@ public class GameManager : MonoBehaviour
             pauseButton.SetActive(true);
         }
         Time.timeScale = 1.0f;
+    }
+
+    public void WaveComplete(int troopsDeployed)
+    {
+        totalUnitsSpawned += troopsDeployed;
+    }
+
+    public void UpdateLifetimeEconomy(int moneySpent)
+    {
+        totalMoneySpent += moneySpent;
     }
 
 }
