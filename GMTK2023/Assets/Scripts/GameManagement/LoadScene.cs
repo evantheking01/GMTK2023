@@ -28,7 +28,7 @@ public class LoadScene : MonoBehaviour
     {
         // "Level1" Level + levelIndex.ToString()
         if (SceneManager.sceneCountInBuildSettings <= levelIndex)
-            levelIndex = SceneManager.sceneCount-1;
+            levelIndex = SceneManager.sceneCountInBuildSettings - 1;
         Debug.Log("Load scene at index " + levelIndex);
         SceneManager.LoadScene(levelIndex);
     }

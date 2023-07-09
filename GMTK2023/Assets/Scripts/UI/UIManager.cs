@@ -13,7 +13,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject deploymentZoneUIPrefab;
     [SerializeField] RectTransform deploymentZonesPanel;
     [SerializeField] WorldSpaceUIElement goalProgressElement;
-    [SerializeField] Text moneyText, potentialEarningsText, waveText;
+    [SerializeField] Text waveText;
+    [SerializeField] NumberCounter moneyText, potentialEarningsText;
+    [SerializeField] Button retreatButton;
     private CanvasScaler canvasScaler;
     
     private TroopShopUI shopUI;
@@ -37,7 +39,7 @@ public class UIManager : MonoBehaviour
         else
             _instance = this;
 
-        moneyText.text = "";    // hides this while in main menu
+        moneyText.QuickText("");    // hides this while in main menu
 
         if (EconomyManager.Instance.moneyChangeEvent == null)
             EconomyManager.Instance.moneyChangeEvent = new UnityEngine.Events.UnityEvent<int>();
@@ -96,12 +98,16 @@ public class UIManager : MonoBehaviour
 
     private void UpdateMoneyText(int money)
     {
-        moneyText.text = money.ToString("C");
+        float val = moneyText.GetText();
+        moneyText.SetText(val, money, true, 0.5f, "C");
+        //moneyText.text = money.ToString("C");
     }
 
     public void UpdatePotentialEarnings(int value)
     {
-        potentialEarningsText.text = $"+{value.ToString("C")}";
+        float val = potentialEarningsText.GetText();
+        potentialEarningsText.SetText(val, value, true, 0.5f, "C", "", "+");
+        //potentialEarningsText.text = $"+{value.ToString("C")}";
     }
 
     public Transform GetMoneyTextTransform()
