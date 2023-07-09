@@ -28,13 +28,17 @@ public class LevelManager : MonoBehaviour
     private int unitCount = 0;
     private int goalCount = 0;
 
+    public int GetUnitCount()
+    {
+        return unitCount;
+    }
+
     private int winCount = 10;
 
     private float minDist = 10000;
 
     private bool done;
-    private Soldier[] allsoldiers;
-
+    
     // Start is called before the first frame update
     protected virtual void Start()
     {
