@@ -11,22 +11,22 @@ PrefabInstance:
     - target: {fileID: 2923356958296725669, guid: b4f5faf5098e6424584fc98011c89132,
         type: 3}
       propertyPath: m_RootOrder
-      value: 23
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2923356958296725669, guid: b4f5faf5098e6424584fc98011c89132,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 91.0986
       objectReference: {fileID: 0}
     - target: {fileID: 2923356958296725669, guid: b4f5faf5098e6424584fc98011c89132,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.9874992
       objectReference: {fileID: 0}
     - target: {fileID: 2923356958296725669, guid: b4f5faf5098e6424584fc98011c89132,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -9.856598
       objectReference: {fileID: 0}
     - target: {fileID: 2923356958296725669, guid: b4f5faf5098e6424584fc98011c89132,
         type: 3}
@@ -36,17 +36,17 @@ PrefabInstance:
     - target: {fileID: 2923356958296725669, guid: b4f5faf5098e6424584fc98011c89132,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2923356958296725669, guid: b4f5faf5098e6424584fc98011c89132,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2923356958296725669, guid: b4f5faf5098e6424584fc98011c89132,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2923356958296725669, guid: b4f5faf5098e6424584fc98011c89132,
         type: 3}
@@ -68,6 +68,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 2f761f94d16827a4dad4e42528e0bad9, type: 2}
+    - target: {fileID: 4264533440308301162, guid: b4f5faf5098e6424584fc98011c89132,
+        type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4264533440308301162, guid: b4f5faf5098e6424584fc98011c89132,
         type: 3}
       propertyPath: damage
