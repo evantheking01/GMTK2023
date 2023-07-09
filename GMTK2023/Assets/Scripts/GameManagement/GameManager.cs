@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public GameObject pauseButton;
 
     [SerializeField] int startingMoney = 100;
+    [SerializeField] GameObject sceneChangeSound;
 
     private int totalUnitsSpawned;
     private int startingLevelMoney;
@@ -107,6 +108,8 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        GameObject sceneChange = Instantiate(sceneChangeSound, transform.position, transform.rotation);
+        Destroy(sceneChange, .2f);
         StartLevel();
     }
 

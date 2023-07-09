@@ -885,6 +885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doColorFlash: 0
   colorFlash: {r: 0, g: 0, b: 0, a: 0}
+  useLastValue: 0
 --- !u!1 &1004490502249384572
 GameObject:
   m_ObjectHideFlags: 0
@@ -1073,6 +1074,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doColorFlash: 0
   colorFlash: {r: 0, g: 0, b: 0, a: 0}
+  useLastValue: 0
 --- !u!1 &1212178881345760814
 GameObject:
   m_ObjectHideFlags: 0
@@ -3261,6 +3263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doColorFlash: 0
   colorFlash: {r: 0, g: 0, b: 0, a: 0}
+  useLastValue: 0
 --- !u!1 &4213774714910609079
 GameObject:
   m_ObjectHideFlags: 0
@@ -4346,6 +4349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doColorFlash: 0
   colorFlash: {r: 0, g: 0, b: 0, a: 0}
+  useLastValue: 0
 --- !u!1 &5103683475704145562
 GameObject:
   m_ObjectHideFlags: 0
@@ -4402,6 +4406,8 @@ MonoBehaviour:
   pauseMenu: {fileID: 5945579264200107768}
   pauseButton: {fileID: 120798760274563663}
   startingMoney: 100
+  sceneChangeSound: {fileID: 8606984358861762898, guid: 859f2af92d5f97a43ac620c6d3c00177,
+    type: 3}
 --- !u!1 &5294994788105901755
 GameObject:
   m_ObjectHideFlags: 0
@@ -4815,6 +4821,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doColorFlash: 0
   colorFlash: {r: 0, g: 0, b: 0, a: 0}
+  useLastValue: 0
 --- !u!1 &5945579264200107768
 GameObject:
   m_ObjectHideFlags: 0
@@ -7260,6 +7267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doColorFlash: 0
   colorFlash: {r: 0, g: 0, b: 0, a: 0}
+  useLastValue: 0
 --- !u!1 &8552977007683954314
 GameObject:
   m_ObjectHideFlags: 0
