@@ -19,6 +19,7 @@ public class LevelManager : MonoBehaviour
 
     private DeploymentZone[] deploymentZones;
     [SerializeField] private int numWaves = 5;
+    [SerializeField] private int startingMoney = 100;
     [SerializeField] private GameObject winScreen;
 
     public int Wave { get { return currWave; } }
@@ -28,15 +29,14 @@ public class LevelManager : MonoBehaviour
     private int unitCount = 0;
     private int goalCount = 0;
 
+    [SerializeField] private int winCount = 10;
     public int GetUnitCount()
     {
         return unitCount;
     }
 
-    private int winCount = 10;
-
     private float minDist = 10000;
-
+    private int moneySpent;
     private bool done;
     
     // Start is called before the first frame update
@@ -54,8 +54,6 @@ public class LevelManager : MonoBehaviour
         if(currentState == gameState.attack && unitCount == 0 && EconomyManager.Instance.GetMoney() < 50 && !Input.GetMouseButton(0))
         {
             currentState = gameState.planning;
-
-            EconomyManager.Instance.attackPhaseOver();
             EndWave();
         }
         else if(currentState == gameState.attack && unitCount == 1 && EconomyManager.Instance.GetMoney() < 50 && !Input.GetMouseButton(0))
@@ -84,6 +82,7 @@ public class LevelManager : MonoBehaviour
         currWave = 0;
         StartWave();
         UIManager.Instance.UpdateGoalProgress($"{goalCount}/{winCount}");
+        EconomyManager.Instance.SetMoney(startingMoney);
     }
 
     public void GoalReached()
@@ -146,6 +145,15 @@ public class LevelManager : MonoBehaviour
     public void EndWave()
     {
         if (done) return;   // so we dont show ui again when money is spent after all guys make it
+
+        Soldier[] allSoldiers = FindObjectsOfType<Soldier>();
+        for (int i = 0; i < allSoldiers.Length; i++)
+        {
+            if (allSoldiers[i] != null)
+                allSoldiers[i].Kill();
+        }
+
+        EconomyManager.Instance.attackPhaseOver();
         done = true;
         GameManager.Instance.WaveComplete(totalSpawned);
         if (currWave >= numWaves)
@@ -156,7 +164,7 @@ public class LevelManager : MonoBehaviour
 
         UIManager.Instance.ShowEndWaveUI(
             totalSpawned,
-            EconomyManager.Instance.MoneySpent,
+            moneySpent,
             EconomyManager.Instance.AttackMoney,
             EconomyManager.Instance.GetMoney(),
             currWave
@@ -169,6 +177,7 @@ public class LevelManager : MonoBehaviour
         done = false;
         currWave++;
         totalSpawned = 0;
+        moneySpent = 0;
         UIManager.Instance.SetWaveText(currWave, numWaves);
         UIManager.Instance.UpdatePotentialEarnings(0);
         EconomyManager.Instance.StartPlanningPhase();
