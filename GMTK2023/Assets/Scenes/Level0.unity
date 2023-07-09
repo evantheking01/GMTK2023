@@ -8800,6 +8800,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e74f48f2f03a1d64b919f4f5643d4e5d, type: 2}
   - {fileID: 11400000, guid: bdeb316e7ecc5ee4fabe7d07ebc1b52f, type: 2}
   numWaves: 5
+  startingMoney: 1500
   winScreen: {fileID: 0}
   winCount: 50
 --- !u!4 &1677453378

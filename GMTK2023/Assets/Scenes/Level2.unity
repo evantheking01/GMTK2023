@@ -4949,7 +4949,7 @@ PrefabInstance:
     - target: {fileID: 5481226889009272412, guid: 4f5feadfafec82a41bfe50eb4edfffe7,
         type: 3}
       propertyPath: radius
-      value: 8
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6894529354896704403, guid: 4f5feadfafec82a41bfe50eb4edfffe7,
         type: 3}
@@ -6483,6 +6483,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e74f48f2f03a1d64b919f4f5643d4e5d, type: 2}
   - {fileID: 11400000, guid: bdeb316e7ecc5ee4fabe7d07ebc1b52f, type: 2}
   numWaves: 5
+  startingMoney: 500
   winScreen: {fileID: 0}
   winCount: 20
 --- !u!4 &1677453378
