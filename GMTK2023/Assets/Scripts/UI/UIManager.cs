@@ -52,6 +52,18 @@ public class UIManager : MonoBehaviour
         else
             canvasScale = canvasScaler.referenceResolution.x / Screen.width;
         StartCoroutine(RefreshCanvasScale());
+
+        retreatButton.onClick.AddListener(endWave);
+        retreatButton.gameObject.SetActive(false);
+    }
+
+    private void endWave()
+    {
+        LevelManager thisLevel = GameObject.FindObjectOfType<LevelManager>();
+        if (thisLevel != null)
+        {
+            thisLevel.EndWave();
+        }
     }
 
     private IEnumerator RefreshCanvasScale()
@@ -79,6 +91,8 @@ public class UIManager : MonoBehaviour
         shopUI.Initialize(shopData);
         GoalManager goal = GameObject.FindObjectOfType<GoalManager>();
         goalProgressElement.target = goal.transform;
+
+        retreatButton.gameObject.SetActive(true);
     }
 
     public void InitializeDeploymentZonesUI(DeploymentZone[] deploymentZones)
