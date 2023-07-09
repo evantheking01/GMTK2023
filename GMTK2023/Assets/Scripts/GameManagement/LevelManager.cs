@@ -19,6 +19,7 @@ public class LevelManager : MonoBehaviour
 
     private DeploymentZone[] deploymentZones;
     [SerializeField] private int numWaves = 5;
+    [SerializeField] private int startingMoney = 100;
     [SerializeField] private GameObject winScreen;
 
     public int Wave { get { return currWave; } }
@@ -84,6 +85,7 @@ public class LevelManager : MonoBehaviour
         currWave = 0;
         StartWave();
         UIManager.Instance.UpdateGoalProgress($"{goalCount}/{winCount}");
+        EconomyManager.Instance.SetMoney(startingMoney);
     }
 
     public void GoalReached()
