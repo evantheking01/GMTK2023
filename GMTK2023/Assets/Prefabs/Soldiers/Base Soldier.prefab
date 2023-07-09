@@ -252,6 +252,8 @@ MonoBehaviour:
   navMeshAgent: {fileID: 8219456114597123779}
   scream: {fileID: 8300000, guid: 91ed921f7e3c8e943ac0bdcee3df2d46, type: 3}
   footstep: {fileID: 8300000, guid: ae32a4274d6ac0d4696c2556ccdcc971, type: 3}
+  flagPrefab: {fileID: 6758229474020183014, guid: 4f8c651ee5d01a144b7a98703b61bb02,
+    type: 3}
   playScreamOnDeath: 0
 --- !u!82 &1053676268433270126
 AudioSource:

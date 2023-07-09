@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject pauseButton;
 
+    public GameObject winScreen;
+
     [SerializeField] int startingMoney = 100;
 
     private int totalUnitsSpawned;
@@ -92,6 +94,16 @@ public class GameManager : MonoBehaviour
             lm.Wave,
             win
             );
+
+        //If this is the last level, show the win screen
+        if(SceneManager.sceneCount-1 == SceneManager.GetActiveScene().buildIndex)
+        {
+            if(winScreen != null)
+            {
+                winScreen.SetActive(true);
+            }
+        }
+        
 
         totalUnitsSpawned = 0;
         totalMoneySpent = 0;

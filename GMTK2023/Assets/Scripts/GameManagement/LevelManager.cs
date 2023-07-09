@@ -20,6 +20,7 @@ public class LevelManager : MonoBehaviour
     private DeploymentZone[] deploymentZones;
     [SerializeField] private int numWaves = 5;
     [SerializeField] private GameObject winScreen;
+
     public int Wave { get { return currWave; } }
     private int currWave;
 
@@ -54,7 +55,8 @@ public class LevelManager : MonoBehaviour
         }
         else if(currentState == gameState.attack && unitCount == 1 && EconomyManager.Instance.GetMoney() < 50 && !Input.GetMouseButton(0))
         {
-            GameObject.FindFirstObjectByType<Soldier>().playScreamOnDeath = true;
+            Soldier soldier = GameObject.FindFirstObjectByType<Soldier>();
+            soldier.playScreamOnDeath = true;
         }
     }
 
@@ -85,10 +87,6 @@ public class LevelManager : MonoBehaviour
         UIManager.Instance.UpdateGoalProgress($"{goalCount}/{winCount}");
         if (goalCount >= winCount && !done)
         {
-            if(winScreen != null)
-            {
-                winScreen.SetActive(true);
-            }
             done = true;
             GameManager.Instance.WaveComplete(totalSpawned);
             GameManager.Instance.LevelEnd(true);
