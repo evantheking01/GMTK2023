@@ -28,7 +28,7 @@ public class LevelManager : MonoBehaviour
     private int unitCount = 0;
     private int goalCount = 0;
 
-    private int winCount = 10;
+    [SerializeField] private int winCount = 10;
 
     private float minDist = 10000;
     private int moneySpent;
