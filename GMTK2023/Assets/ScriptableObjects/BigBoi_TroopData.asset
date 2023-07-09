@@ -17,5 +17,5 @@ MonoBehaviour:
     type: 3}
   costPerUnit: 250
   bulkPurcaseCounts: 0100000005000000
-  thumbnail: {fileID: 0}
+  thumbnail: {fileID: 21300000, guid: 0dfb9191c09f2c94b8eb3ee469f728d0, type: 3}
   description: A big beefy boy, ready to take on those big beefy bullets.
