@@ -89,7 +89,13 @@ public class Turret : MonoBehaviour
 
     private static bool OutOfRange(Transform here,Transform there, float r)
     {
-        return Vector3.Distance(here.position, there.position) > r;
+        Vector3 herePosition = here.position;
+        herePosition.y = 0.0f;
+
+        Vector3 therePosition = there.position;
+        therePosition.y = 0.0f;
+        
+        return Vector3.Distance(herePosition, therePosition) > r;
     }
 
     private List<GameObject> SortFastestTarget(List<GameObject> enemies)
