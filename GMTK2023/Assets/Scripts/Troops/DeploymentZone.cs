@@ -29,7 +29,7 @@ public class DeploymentZone : MonoBehaviour
             {
 
                 GameObject troopPrefab = troopDatabase[deploymentQueue.Dequeue()];
-                Soldier soldier = Instantiate(troopPrefab, transform).GetComponent<Soldier>();    // relies on prefabs having a zero vector position.
+                Soldier soldier = Instantiate(troopPrefab, transform).GetComponentInChildren<Soldier>();    // relies on prefabs having a zero vector position.
                 soldier.deathEvent = new UnityEvent<Vector3>();
                 soldier.deathEvent.AddListener(calculateDeathDistance);
 
