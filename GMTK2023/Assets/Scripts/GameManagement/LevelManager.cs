@@ -140,6 +140,8 @@ public class LevelManager : MonoBehaviour
 
     public void EndWave()
     {
+        if (done) return;   // so we dont show ui again when money is spent after all guys make it
+        done = true;
         GameManager.Instance.WaveComplete(totalSpawned);
         if (currWave >= numWaves)
         {
@@ -159,6 +161,7 @@ public class LevelManager : MonoBehaviour
 
     public void StartWave()
     {
+        done = false;
         currWave++;
         totalSpawned = 0;
         UIManager.Instance.SetWaveText(currWave, numWaves);

@@ -42,7 +42,6 @@ public class GameManager : MonoBehaviour
         
         economyManager.Initialize();
         uiManager.Initialize();
-        economyManager.SetMoney(startingMoney);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
 
@@ -71,6 +70,7 @@ public class GameManager : MonoBehaviour
         }
 
         currLevel = 0;
+        economyManager.SetMoney(startingMoney);
         LoadNextLevel();
     }
 
