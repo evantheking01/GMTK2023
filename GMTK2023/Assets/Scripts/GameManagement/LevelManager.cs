@@ -29,11 +29,15 @@ public class LevelManager : MonoBehaviour
     private int goalCount = 0;
 
     [SerializeField] private int winCount = 10;
+    public int GetUnitCount()
+    {
+        return unitCount;
+    }
 
     private float minDist = 10000;
     private int moneySpent;
     private bool done;
-
+    
     // Start is called before the first frame update
     protected virtual void Start()
     {
