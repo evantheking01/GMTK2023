@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public GameObject startMenu;
     public GameObject pauseMenu;
     public GameObject pauseButton;
+    public GameObject[] quitButtons;
 
     public GameObject winScreen;
 
@@ -98,6 +99,7 @@ public class GameManager : MonoBehaviour
         }
 
         _levelManagerTmp = levelManager;
+        startingLevelMoney = EconomyManager.Instance.GetMoney();
     }
 
     public void LevelEnd(bool win)
@@ -151,6 +153,11 @@ public class GameManager : MonoBehaviour
         pauseMenu.SetActive(false);
 
         startMenu.SetActive(true);
+
+        foreach (var button in quitButtons)
+        {
+            button.SetActive(Application.platform != RuntimePlatform.WebGLPlayer);
+        }
 
         startingLevelMoney = EconomyManager.Instance.GetMoney();
     }
