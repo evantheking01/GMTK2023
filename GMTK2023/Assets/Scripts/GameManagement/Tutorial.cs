@@ -25,7 +25,7 @@ public class Tutorial : MonoBehaviour
     private void TeachPurchase()
     {
         TroopShopUI troopShop = GameObject.FindObjectOfType<TroopShopUI>();
-        if (troopShop != null)
+        if (troopShop == null)
             return;
         
         Transform smallestUnit = troopShop.GetFirstShopItem();
