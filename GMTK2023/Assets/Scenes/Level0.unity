@@ -8801,6 +8801,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bdeb316e7ecc5ee4fabe7d07ebc1b52f, type: 2}
   numWaves: 5
   winScreen: {fileID: 0}
+  winCount: 50
 --- !u!4 &1677453378
 Transform:
   m_ObjectHideFlags: 0
