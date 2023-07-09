@@ -8,6 +8,9 @@ public class NumberCounter : MonoBehaviour
 {
     public bool doColorFlash;
     public Color colorFlash;
+    public bool useLastValue;
+
+    private float lastValue;
 
     public void QuickText(string val)
     {
@@ -17,17 +20,10 @@ public class NumberCounter : MonoBehaviour
 
     public void SetText(float startVal, float endVal, bool isInt, float timeToCount = 1f, string format = "", string suffix="", string prefix="")
     {
+        if (useLastValue)
+            startVal = lastValue;
+        lastValue = endVal;
         StartCoroutine(CountAnimation(startVal, endVal, isInt, timeToCount, format, suffix, prefix));
-    }
-
-    public float GetText(bool isCurrency=true)
-    {
-        Text text = GetComponent<Text>();
-        //float textVal = 0;
-        if (isCurrency)
-            return float.Parse(text.text, System.Globalization.NumberStyles.Currency);
-        
-        return float.Parse(text.text);
     }
 
     private IEnumerator CountAnimation(float startVal, float endVal, bool isInt, float timeToCount, string format, string suffix, string prefix)

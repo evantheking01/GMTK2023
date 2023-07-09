@@ -98,15 +98,15 @@ public class UIManager : MonoBehaviour
 
     private void UpdateMoneyText(int money)
     {
-        float val = moneyText.GetText();
-        moneyText.SetText(val, money, true, 0.5f, "C");
+        moneyText.useLastValue = true ;
+        moneyText.SetText(0, money, true, 0.5f, "C");
         //moneyText.text = money.ToString("C");
     }
 
     public void UpdatePotentialEarnings(int value)
     {
-        float val = potentialEarningsText.GetText();
-        potentialEarningsText.SetText(val, value, true, 0.5f, "C", "", "+");
+        potentialEarningsText.useLastValue = true;
+        potentialEarningsText.SetText(0, value, true, 0.5f, "C", "", "+");
         //potentialEarningsText.text = $"+{value.ToString("C")}";
     }
 
