@@ -74,7 +74,7 @@ public class DragAndDropTroopElement : MonoBehaviour, IBeginDragHandler, IEndDra
         }
 
         if (!canUse) return;
-
+        hoverObject.SetActive(false);
         int siblingIndex = transform.GetSiblingIndex();
 
         // replace the dragged element because it will be destroyed on drop

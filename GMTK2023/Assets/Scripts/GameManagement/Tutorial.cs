@@ -53,7 +53,7 @@ public class Tutorial : MonoBehaviour
         dzElement = GameObject.FindObjectOfType<DeploymentZoneUIElement>();
 
         hintObject.SetParent(transform);
-        hintObject.position = dzElement.transform.position + new Vector3(40, 40, 0);
+        hintObject.position = dzElement.transform.position + new Vector3(0, -30, 0);
         hintObject.SetParent(transform);
 
         hintText.text = "Drag troops here";
@@ -83,7 +83,7 @@ public class Tutorial : MonoBehaviour
         hintObject.SetParent(moneyTransform);
         hintObject.anchoredPosition = new Vector2(0, 0);
         hintObject.SetParent(transform);
-        hintObject.sizeDelta += new Vector2(100, 0);
+        hintObject.sizeDelta += new Vector2(0, 0);
         hintRectText.sizeDelta += new Vector2(100, 0);
         hintText.text = "Purchasing troops costs money. Wave complete when you are poor.";
     }
