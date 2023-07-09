@@ -38,8 +38,8 @@ public class Turret : MonoBehaviour
     [SerializeField] private Transform pitchTransform;
     [SerializeField] private Transform yawTransform;
     private Quaternion _startingPitch;
-    private Quaternion _startingYaw;
-    private float _currentYaw;
+    private float _startingYaw;
+    private float _currentYaw = 0.0f;
 
     [SerializeField] private float rotationSpeed = 5.0f;
     
@@ -57,7 +57,10 @@ public class Turret : MonoBehaviour
             _startingPitch = pitchTransform.rotation;
 
         if (yawTransform != null)
-            _startingYaw = yawTransform.rotation;
+        {
+            _startingYaw = transform.rotation.eulerAngles.y;
+            _currentYaw = _startingYaw;
+        }
     }
 
     private void SetHelpText()
@@ -144,16 +147,11 @@ public class Turret : MonoBehaviour
 
     void Update()
     {
-        
-        if(target != null)
+        bool isFacing = true;
+        if (yawTransform != null)
         {
-            // Vector3 direction = target.position - transform.position;
-            // Quaternion lookRotation = Quaternion.LookRotation(direction);
-            // Vector3 rotation = Quaternion.Lerp(gun.rotation, lookRotation, Time.deltaTime).eulerAngles;
-            // gun.rotation = Quaternion.Euler(0f, rotation.y, 0f);
-
-            bool isFacing = true;
-            if (yawTransform != null)
+            float targetYaw = _startingYaw;
+            if (target != null)
             {
                 Vector3 from = transform.position;
                 Vector3 to = target.position;
@@ -161,24 +159,27 @@ public class Turret : MonoBehaviour
                 Vector3 direction = (to - from).normalized;
 
                 Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
-                float targetYaw = rotation.eulerAngles.y;
-                
-                _currentYaw = Mathf.MoveTowardsAngle(_currentYaw, targetYaw, rotationSpeed * Time.deltaTime);
-
-                if (Mathf.Abs(_currentYaw - targetYaw) > shootThresholdAngle)
-                    isFacing = false;
-                
-                float desiredYaw = _currentYaw;
-                if (fakeYawSteps > 0.0f)
-                    desiredYaw = Mathf.Round(_currentYaw / fakeYawSteps) * fakeYawSteps;
-                        
-                yawTransform.rotation = Quaternion.Euler(0.0f, desiredYaw, 0.0f) * _startingYaw;
+                targetYaw = rotation.eulerAngles.y;
             }
 
-            if (pitchTransform != null)
-            {
+            _currentYaw = Mathf.MoveTowardsAngle(_currentYaw, targetYaw, rotationSpeed * Time.deltaTime);
                 
-            }
+            if (Mathf.Abs(Mathf.DeltaAngle(_currentYaw, targetYaw)) > shootThresholdAngle)
+                isFacing = false;
+
+            float desiredYaw = _currentYaw - _startingYaw;
+            if (fakeYawSteps > 0.0f)
+                desiredYaw = Mathf.Round(desiredYaw / fakeYawSteps) * fakeYawSteps;
+
+            yawTransform.localRotation = Quaternion.Euler(0.0f, 0.0f, desiredYaw + 90.0f);
+        }
+        
+        if(target != null)
+        {
+            // Vector3 direction = target.position - transform.position;
+            // Quaternion lookRotation = Quaternion.LookRotation(direction);
+            // Vector3 rotation = Quaternion.Lerp(gun.rotation, lookRotation, Time.deltaTime).eulerAngles;
+            // gun.rotation = Quaternion.Euler(0f, rotation.y, 0f);
 
             if (gun != null)
                 gun.LookAt(target);
