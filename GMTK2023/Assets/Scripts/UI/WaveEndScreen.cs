@@ -79,6 +79,7 @@ public class WaveEndScreen : MonoBehaviour
 
     public void Launch()
     {
+        Debug.Log("launch");
         animator = GetComponent<Animator>();
         animator.SetTrigger("Launch");
     }

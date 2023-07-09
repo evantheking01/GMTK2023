@@ -6,14 +6,17 @@ using Text = TMPro.TextMeshProUGUI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class DragAndDropTroopElement : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class DragAndDropTroopElement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public UnityEvent grabEvent;
     public UnityEvent<bool> dropEvent;
 
     private RectTransform rectTransform;
     private LayoutElement layoutElement;
-    public Text countText, costText;
+    public Text countText, costText, nameText, descriptionText;
+    public Image thumbnailImage;
+    public GameObject hoverObject;
+    private Animator animator;
 
     private TroopPurchaseData troopData;
     private int troopCount;
@@ -38,10 +41,16 @@ public class DragAndDropTroopElement : MonoBehaviour, IPointerDownHandler, IBegi
     {
         troopData = data;
         troopCount = count;
-        countText.text = troopCount.ToString();
-        costText.text = PurchaseCost().ToString();
-        layoutElement = GetComponent<LayoutElement>();
 
+        thumbnailImage.sprite = data.thumbnail;
+        countText.text = "x" + troopCount.ToString();
+        costText.text = PurchaseCost().ToString("C");
+        nameText.text = data.groupName;
+        descriptionText.text = data.description;
+        hoverObject.SetActive(false);
+
+        layoutElement = GetComponent<LayoutElement>();
+        animator = GetComponent<Animator>();
         if (count < 0)
         {
             // use this to buy all you can
@@ -57,7 +66,8 @@ public class DragAndDropTroopElement : MonoBehaviour, IPointerDownHandler, IBegi
     {
         if(!EconomyManager.Instance.CanAfford(PurchaseCost()))
         {
-            //TODO: Tell the user they are broke
+            animator.SetTrigger("Shake");
+
             Debug.Log("You do not have: " + PurchaseCost());
             canDrag = false;
             return;
@@ -123,18 +133,27 @@ public class DragAndDropTroopElement : MonoBehaviour, IPointerDownHandler, IBegi
         {
             EconomyManager.Instance.IncreaseMoney(PurchaseCost());
         }     
+        else
+        {
+            GameManager.Instance.UpdateLifetimeEconomy(PurchaseCost());
+        }
 
         Destroy(gameObject);
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnPointerEnter(PointerEventData eventData)
     {
+        hoverObject.SetActive(true && !canDrag);
+    }
 
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        hoverObject.SetActive(false);
     }
 
     public void SetCanUse(bool val)
     {
         canUse = val;
-        GetComponent<Button>().interactable = val;
+        GetComponentInChildren<Button>().interactable = val;
     }
 }

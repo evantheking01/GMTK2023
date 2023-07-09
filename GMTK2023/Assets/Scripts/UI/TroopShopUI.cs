@@ -47,7 +47,7 @@ public class TroopShopUI : MonoBehaviour
             
             Instantiate(separatorPrefab, transform);
         }
-        //Destroy(transform.GetChild(transform.childCount - 1));  // removes the last separator and looks cleaner
+        Destroy(transform.GetChild(transform.childCount - 1));  // removes the last separator and looks cleaner
     }
 
     // Update is called once per frame

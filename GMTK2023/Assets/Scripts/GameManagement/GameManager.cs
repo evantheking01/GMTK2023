@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject pauseButton;
 
+    [SerializeField] int startingMoney = 100;
+
     private int totalUnitsSpawned;
     private int startingLevelMoney;
     private int totalMoneySpent;
@@ -27,6 +29,7 @@ public class GameManager : MonoBehaviour
         if (_instance != null && _instance != this)
         {
             Destroy(gameObject);
+            return;
         }
         else
         {
@@ -36,7 +39,7 @@ public class GameManager : MonoBehaviour
         
         economyManager.Initialize();
         uiManager.Initialize();
-        economyManager.SetMoney(10000);
+        economyManager.SetMoney(startingMoney);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
 
