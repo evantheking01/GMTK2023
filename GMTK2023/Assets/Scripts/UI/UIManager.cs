@@ -40,6 +40,9 @@ public class UIManager : MonoBehaviour
             _instance = this;
 
         moneyText.QuickText("");    // hides this while in main menu
+        potentialEarningsText.QuickText("");
+        waveText.text = "";
+        goalProgressElement.SetText("");
 
         if (EconomyManager.Instance.moneyChangeEvent == null)
             EconomyManager.Instance.moneyChangeEvent = new UnityEngine.Events.UnityEvent<int>();

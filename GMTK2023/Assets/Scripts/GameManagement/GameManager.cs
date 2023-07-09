@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject pauseButton;
 
+    public GameObject winScreen;
+
     [SerializeField] int startingMoney = 100;
     [SerializeField] GameObject sceneChangeSound;
 
@@ -47,7 +49,6 @@ public class GameManager : MonoBehaviour
         
         economyManager.Initialize();
         uiManager.Initialize();
-        economyManager.SetMoney(startingMoney);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
 
@@ -83,6 +84,7 @@ public class GameManager : MonoBehaviour
         }
 
         currLevel = 0;
+        economyManager.SetMoney(startingMoney);
         LoadNextLevel();
     }
 
@@ -109,6 +111,16 @@ public class GameManager : MonoBehaviour
             lm.Wave,
             win
             );
+
+        //If this is the last level, show the win screen
+        if(SceneManager.sceneCount-1 == SceneManager.GetActiveScene().buildIndex)
+        {
+            if(winScreen != null)
+            {
+                winScreen.SetActive(true);
+            }
+        }
+        
 
         totalUnitsSpawned = 0;
         totalMoneySpent = 0;
