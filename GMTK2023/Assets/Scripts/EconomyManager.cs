@@ -14,7 +14,11 @@ public class EconomyManager : MonoBehaviour
     public float deathMaximumMoney = 1000f;
 
     private int money;
+    public int AttackMoney { get { return attackMoney; } }
     private int attackMoney;
+
+    public int MoneySpent { get { return money - startingMoney; } }
+    private int startingMoney;
 
     // Start is called before the first frame update
     void Start()
@@ -76,12 +80,18 @@ public class EconomyManager : MonoBehaviour
     {
         float moneyAwarded = ((deathMaximumMoney - deathMinimumMoney) * pathCompletionRatio) + deathMinimumMoney;
         attackMoney += (int) moneyAwarded;
+        UIManager.Instance.UpdatePotentialEarnings(attackMoney);
+    }
+
+    public void StartPlanningPhase()
+    {
+        attackMoney = 0;
+        startingMoney = money;
     }
 
     public void attackPhaseOver()
     {
         IncreaseMoney(attackMoney);
-        attackMoney = 0;
     }
 
 }
