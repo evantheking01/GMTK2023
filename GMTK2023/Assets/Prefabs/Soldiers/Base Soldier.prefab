@@ -128,7 +128,6 @@ GameObject:
   - component: {fileID: 5967550104950891267}
   - component: {fileID: 6316074865939758447}
   - component: {fileID: 6594047326278143226}
-  - component: {fileID: 3300941960402473916}
   - component: {fileID: 4263370581765861882}
   - component: {fileID: 1053676268433270126}
   - component: {fileID: 8690786239939019138}
@@ -228,28 +227,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!195 &3300941960402473916
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5814014477497789810}
-  m_Enabled: 0
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 1
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!114 &4263370581765861882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,6 +240,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  deathAnimation: {fileID: 8908819624858437533, guid: 64ac4b34b6cac594f9296ee29e81095a,
+    type: 3}
   speed: 3
   size: 3
   healthBar: {fileID: 3179999688553805622}
@@ -273,6 +252,7 @@ MonoBehaviour:
   navMeshAgent: {fileID: 8219456114597123779}
   scream: {fileID: 8300000, guid: 91ed921f7e3c8e943ac0bdcee3df2d46, type: 3}
   footstep: {fileID: 8300000, guid: ae32a4274d6ac0d4696c2556ccdcc971, type: 3}
+  playScreamOnDeath: 0
 --- !u!82 &1053676268433270126
 AudioSource:
   m_ObjectHideFlags: 0
