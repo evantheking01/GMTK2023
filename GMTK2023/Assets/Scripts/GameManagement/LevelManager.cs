@@ -89,11 +89,9 @@ public class LevelManager : MonoBehaviour
     {
         goalCount++;
         UIManager.Instance.UpdateGoalProgress($"{goalCount}/{winCount}");
-        if (goalCount >= winCount && !done)
+        if (goalCount >= winCount)
         {
-            done = true;
-            GameManager.Instance.WaveComplete(totalSpawned);
-            GameManager.Instance.LevelEnd(true);
+            EndWave();
         }
     }
 
@@ -145,6 +143,7 @@ public class LevelManager : MonoBehaviour
     public void EndWave()
     {
         if (done) return;   // so we dont show ui again when money is spent after all guys make it
+        done = true;
 
         Soldier[] allSoldiers = FindObjectsOfType<Soldier>();
         for (int i = 0; i < allSoldiers.Length; i++)
@@ -154,14 +153,22 @@ public class LevelManager : MonoBehaviour
         }
 
         EconomyManager.Instance.attackPhaseOver();
-        done = true;
         GameManager.Instance.WaveComplete(totalSpawned);
+        // we have lost
         if (currWave >= numWaves)
         {
             GameManager.Instance.LevelEnd(false);
             return;
         }
 
+        // we have won
+        if (goalCount >= winCount)
+        {
+            GameManager.Instance.LevelEnd(true);
+            return;
+        }
+        
+        // round over. vibin'
         UIManager.Instance.ShowEndWaveUI(
             totalSpawned,
             moneySpent,
