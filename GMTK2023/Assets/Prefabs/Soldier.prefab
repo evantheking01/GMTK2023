@@ -151,7 +151,7 @@ Transform:
   m_Children:
   - {fileID: 3381184981662970213}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2961206274467456131
 MeshFilter:
@@ -261,6 +261,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  deathAnimation: {fileID: 8908819624858437533, guid: 64ac4b34b6cac594f9296ee29e81095a,
+    type: 3}
   speed: 3
   size: 3
   healthBar: {fileID: 7889458345010048460}

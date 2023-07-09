@@ -6,6 +6,7 @@ using  UnityEngine.Events;
 public class Soldier : MonoBehaviour
 {
     public float maxHealth = 100f;
+    public GameObject deathAnimation;
 
     public float speed = 1f;
 
@@ -48,9 +49,7 @@ public class Soldier : MonoBehaviour
 
         if(currentHealth <= 0)
         {
-            
-            deathEvent.Invoke(transform.position);
-            Destroy(gameObject);
+            Kill();
         }  
     }
 
@@ -59,6 +58,21 @@ public class Soldier : MonoBehaviour
         currentHealth = 0;
         healthBar.SetHealth(currentHealth);
         deathEvent.Invoke(transform.position);
+
+        GameObject newDeathAnimation = Instantiate(deathAnimation, transform.position, transform.rotation) as GameObject;
+        ParticleSystem[] newParticles = newDeathAnimation.GetComponentsInChildren<ParticleSystem>();
+        float longestSoFar = 0f;
+        for (int i = 0; i < newParticles.Length; i++)
+        {
+            var em = newParticles[i].emission;
+            em.enabled = true;
+            newParticles[i].Play();
+            float currentParticleDuration = newParticles[i].main.duration + newParticles[i].main.startLifetime.constant;
+            if(currentParticleDuration > longestSoFar)
+                longestSoFar = currentParticleDuration;
+        }
+
+        Destroy(newDeathAnimation, longestSoFar);
         Destroy(gameObject);
     }
 }

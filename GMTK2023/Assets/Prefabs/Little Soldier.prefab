@@ -261,6 +261,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 50
+  deathAnimation: {fileID: 8908819624858437533, guid: 64ac4b34b6cac594f9296ee29e81095a,
+    type: 3}
   speed: 5
   size: 2
   healthBar: {fileID: 7889458345010048460}
