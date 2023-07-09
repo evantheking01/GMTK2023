@@ -5365,6 +5365,9 @@ MonoBehaviour:
   startMenu: {fileID: 8036244853953025105}
   pauseMenu: {fileID: 5945579264200107768}
   pauseButton: {fileID: 120798760274563663}
+  quitButtons:
+  - {fileID: 4329128981071312148}
+  - {fileID: 5038765411339363154}
   winScreen: {fileID: 4515121121687576381}
   startingMoney: 100
   sceneChangeSound: {fileID: 8606984358861762898, guid: 859f2af92d5f97a43ac620c6d3c00177,
