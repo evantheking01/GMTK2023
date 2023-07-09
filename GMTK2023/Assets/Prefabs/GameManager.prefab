@@ -2764,8 +2764,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4379,6 +4379,7 @@ MonoBehaviour:
   startMenu: {fileID: 8036244853953025105}
   pauseMenu: {fileID: 5945579264200107768}
   pauseButton: {fileID: 120798760274563663}
+  startingMoney: 100
 --- !u!1 &5294994788105901755
 GameObject:
   m_ObjectHideFlags: 0
