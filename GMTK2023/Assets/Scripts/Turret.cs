@@ -28,8 +28,13 @@ public class Turret : MonoBehaviour
 
     [SerializeField] private Text helpText;
 
+    [SerializeField] private AudioClip gunshot;
+
+    private AudioSource audioSource;
+
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         InvokeRepeating("UpdateTarget", 0f, 0.1f);
         SetHelpText();
     }
@@ -142,11 +147,18 @@ public class Turret : MonoBehaviour
     void Shoot()
     {
         GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-                Bullet bullet = bulletGO.GetComponent<Bullet>();
-                bullet.damage = damage;
+        Bullet bullet = bulletGO.GetComponent<Bullet>();
+        bullet.damage = damage;
 
-                if (bullet != null)
-                    bullet.Seek(target);
+        if (bullet != null)
+        {
+            bullet.Seek(target);
+        }
+            
+        if(audioSource != null)
+        {
+            audioSource.PlayOneShot(gunshot);
+        }
     }
 
     private void OnDrawGizmos()
